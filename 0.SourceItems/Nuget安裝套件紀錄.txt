@@ -1,0 +1,9 @@
+
+
+3.Entities -> LineBot_LieFlatMonkey.Entities
+Microsoft.EntityFrameworkCore 5.0.0
+Microsoft.EntityFrameworkCore.Design 5.0.0
+Npgsql.EntityFrameworkCore.PostgreSQL 5.0.0
+Npgsql.EntityFrameworkCore.PostgreSQL.Design 1.1.0
+URF.Core.EF.Trackable 5.0.0
+EntityFrameworkCore.Scaffolding.Handlebars 5.0.0
