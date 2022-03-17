@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>35d669a9-b488-44bd-af1e-87a5ba2fcc65</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\1.Plugins\LineBot_LieFlatMonkey.Plugins\LineBot_LieFlatMonkey.Plugins.csproj" />
+    <ProjectReference Include="..\..\2.Assets\LineBot_LieFlatMonkey.Assets\LineBot_LieFlatMonkey.Assets.csproj" />
+    <ProjectReference Include="..\..\3.Entities\LineBot_LieFlatMonkey.Entities\LineBot_LieFlatMonkey.Entities.csproj" />
+    <ProjectReference Include="..\..\5.Modules\LineBot_LieFlatMonkey.Modules\LineBot_LieFlatMonkey.Modules.csproj" />
+  </ItemGroup>
+
+</Project>

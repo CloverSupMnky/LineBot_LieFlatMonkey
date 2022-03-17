@@ -3,9 +3,67 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.WebHost", "6.WebHost", "{6F543FB2-C4C2-40EE-9D03-A348225A367A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineBot_LieFlatMonkey.WebHost", "6.WebHost\LineBot_LieFlatMonkey.WebHost\LineBot_LieFlatMonkey.WebHost.csproj", "{3116AF4C-BF39-4F83-BAFD-16BAB880655C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Modules", "5.Modules", "{D0298A75-3DA3-47F8-AC39-1D6F3865194B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Entities", "3.Entities", "{F639F854-7A4E-4F81-BE83-C6CBEE259163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineBot_LieFlatMonkey.Entities", "3.Entities\LineBot_LieFlatMonkey.Entities\LineBot_LieFlatMonkey.Entities.csproj", "{15C9C620-E99B-41A9-B772-DDC7ED0B10F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Assets", "2.Assets", "{31FD29EA-2E41-443E-8031-48AA1D6DB3C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineBot_LieFlatMonkey.Modules", "5.Modules\LineBot_LieFlatMonkey.Modules\LineBot_LieFlatMonkey.Modules.csproj", "{454809DE-2334-49E6-BA11-C5642FC8968F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineBot_LieFlatMonkey.Assets", "2.Assets\LineBot_LieFlatMonkey.Assets\LineBot_LieFlatMonkey.Assets.csproj", "{B2C4BA83-8FE3-452C-AF3C-D4B54E71A0D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Plugins", "1.Plugins", "{30527036-7F72-40C0-A81B-0CEE678488D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineBot_LieFlatMonkey.Plugins", "1.Plugins\LineBot_LieFlatMonkey.Plugins\LineBot_LieFlatMonkey.Plugins.csproj", "{21472CEA-4A7B-4770-A7E8-929F784E92BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.SourceItems", "0.SourceItems", "{B44CF606-C698-47D0-8A54-22433C8CDC62}"
+	ProjectSection(SolutionItems) = preProject
+		0.SourceItems\HeroKu佈署說明.txt = 0.SourceItems\HeroKu佈署說明.txt
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3116AF4C-BF39-4F83-BAFD-16BAB880655C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3116AF4C-BF39-4F83-BAFD-16BAB880655C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3116AF4C-BF39-4F83-BAFD-16BAB880655C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3116AF4C-BF39-4F83-BAFD-16BAB880655C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C9C620-E99B-41A9-B772-DDC7ED0B10F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C9C620-E99B-41A9-B772-DDC7ED0B10F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C9C620-E99B-41A9-B772-DDC7ED0B10F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C9C620-E99B-41A9-B772-DDC7ED0B10F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{454809DE-2334-49E6-BA11-C5642FC8968F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{454809DE-2334-49E6-BA11-C5642FC8968F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{454809DE-2334-49E6-BA11-C5642FC8968F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{454809DE-2334-49E6-BA11-C5642FC8968F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C4BA83-8FE3-452C-AF3C-D4B54E71A0D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C4BA83-8FE3-452C-AF3C-D4B54E71A0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C4BA83-8FE3-452C-AF3C-D4B54E71A0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C4BA83-8FE3-452C-AF3C-D4B54E71A0D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21472CEA-4A7B-4770-A7E8-929F784E92BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21472CEA-4A7B-4770-A7E8-929F784E92BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21472CEA-4A7B-4770-A7E8-929F784E92BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21472CEA-4A7B-4770-A7E8-929F784E92BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3116AF4C-BF39-4F83-BAFD-16BAB880655C} = {6F543FB2-C4C2-40EE-9D03-A348225A367A}
+		{15C9C620-E99B-41A9-B772-DDC7ED0B10F6} = {F639F854-7A4E-4F81-BE83-C6CBEE259163}
+		{454809DE-2334-49E6-BA11-C5642FC8968F} = {D0298A75-3DA3-47F8-AC39-1D6F3865194B}
+		{B2C4BA83-8FE3-452C-AF3C-D4B54E71A0D4} = {31FD29EA-2E41-443E-8031-48AA1D6DB3C5}
+		{21472CEA-4A7B-4770-A7E8-929F784E92BC} = {30527036-7F72-40C0-A81B-0CEE678488D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4CC3EC18-A499-44E8-9239-22D5F0BA53D9}

@@ -1,0 +1,35 @@
+Docker 啟動問題，安裝 wsl.msi 可以解決
+安裝 HeroKu CLI
+
+調整 DockerFile 
+移除 Entrypoint 
+新增 CMD ASPNETCORE_URLS=http://*:$PORT dotnet 專案名稱.dll
+
+Dockerfile 放至方案根目錄
+
+至方案根目錄下啟動 cmd
+
+1.建立 DockerImage
+docker build -t registry.heroku.com/HerokuAPP名稱/web .
+
+2.更新 heroku
+heroku update
+
+3.登入 Heroku 和 Heroku Container
+heroku login
+heroku container:login
+
+4.執行 DockerFile 建立 Image 並推送
+heroku container:push web -a HerokuAPP名稱
+
+5.進行佈署
+heroku container:release web -a HerokuAPP名稱
+
+6.有調整程式碼,要再次部署時只要執行下面指令即可， 重新建立Image => 登入Heroku => 登入HerokuContainer => 推送 => 佈署
+先清除舊的image
+docker build -t registry.heroku.com/HerokuAPP名稱/web .
+heroku login
+heroku container:login
+heroku container:push web -a HerokuAPP名稱
+heroku container:release web -a HerokuAPP名稱
+
