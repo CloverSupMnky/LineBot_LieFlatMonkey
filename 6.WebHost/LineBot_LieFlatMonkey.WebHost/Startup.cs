@@ -11,6 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LineBot_LieFlatMonkey.Entities.Contexts;
+using Microsoft.EntityFrameworkCore;
+using URF.Core.Abstractions;
+using URF.Core.EF;
+using URF.Core.Abstractions.Trackable;
+using URF.Core.EF.Trackable;
+using LineBot_LieFlatMonkey.Entities.Models;
 
 namespace LineBot_LieFlatMonkey.WebHost
 {
@@ -30,12 +37,24 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.AddControllers();
 
             services.AddCors(options => 
-            options.AddPolicy("CorsPolicy",builder => 
-            {
-                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-            }));
+                options.AddPolicy("CorsPolicy",builder => 
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                })
+            );
 
             services.Configure<LineBotSetting>(Configuration.GetSection("LineBotSetting"));
+
+            #region Entity ª`¤J
+
+            services.AddDbContext<LineBotLieFlatMonkeyContext>(options => options.UseNpgsql(Configuration.GetConnectionString("LineBotNpgsql")));
+
+            services.AddScoped<DbContext, LineBotLieFlatMonkeyContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<ITrackableRepository<TarotCard>, TrackableRepository<TarotCard>>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

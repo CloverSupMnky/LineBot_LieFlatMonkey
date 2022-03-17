@@ -1,6 +1,10 @@
+1.Plugins -> LineBot_LieFlatMonkey.Plugins
+
+Microsoft.Extensions.Options 5.0.0
 
 
 3.Entities -> LineBot_LieFlatMonkey.Entities
+
 Microsoft.EntityFrameworkCore 5.0.0
 Microsoft.EntityFrameworkCore.Design 5.0.0
 Npgsql.EntityFrameworkCore.PostgreSQL 5.0.0
