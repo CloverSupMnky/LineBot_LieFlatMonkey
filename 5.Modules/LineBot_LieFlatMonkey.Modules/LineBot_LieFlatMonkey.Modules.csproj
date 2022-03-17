@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\3.Entities\LineBot_LieFlatMonkey.Entities\LineBot_LieFlatMonkey.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

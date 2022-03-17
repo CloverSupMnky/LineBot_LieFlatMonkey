@@ -18,6 +18,8 @@ using URF.Core.EF;
 using URF.Core.Abstractions.Trackable;
 using URF.Core.EF.Trackable;
 using LineBot_LieFlatMonkey.Entities.Models;
+using LineBot_LieFlatMonkey.Modules.Interfaces;
+using LineBot_LieFlatMonkey.Modules.Services;
 
 namespace LineBot_LieFlatMonkey.WebHost
 {
@@ -44,6 +46,8 @@ namespace LineBot_LieFlatMonkey.WebHost
             );
 
             services.Configure<LineBotSetting>(Configuration.GetSection("LineBotSetting"));
+
+            services.AddScoped<ITarotCardService, TarotCardService>();
 
             #region Entity ª`¤J
 
