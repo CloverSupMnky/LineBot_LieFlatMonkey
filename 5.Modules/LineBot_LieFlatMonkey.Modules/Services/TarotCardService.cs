@@ -43,7 +43,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// <returns>FortuneTellingResp 塔羅牌占卜結果</returns>
         public FortuneTellingResp FortuneTellingByType(string fortuneTellingType)
         {
-            FortuneTellingResp res = null;
+            FortuneTellingResp res = new FortuneTellingResp();
 
             switch (fortuneTellingType)
             {

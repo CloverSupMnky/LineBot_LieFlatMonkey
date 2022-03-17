@@ -20,6 +20,7 @@ using URF.Core.EF.Trackable;
 using LineBot_LieFlatMonkey.Entities.Models;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using LineBot_LieFlatMonkey.Modules.Services;
+using LineBot_LieFlatMonkey.WebHost.Filters;
 
 namespace LineBot_LieFlatMonkey.WebHost
 {
@@ -38,6 +39,14 @@ namespace LineBot_LieFlatMonkey.WebHost
 
             services.AddControllers();
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                // 忽略回圈參考
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                // 設定時間格式
+                options.SerializerSettings.DateFormatString = "yyyy'/'MM'/'dd HH':'mm':'ss.FFFFFFFK";
+            });
+
             services.AddCors(options => 
                 options.AddPolicy("CorsPolicy",builder => 
                 {
@@ -46,6 +55,10 @@ namespace LineBot_LieFlatMonkey.WebHost
             );
 
             services.Configure<LineBotSetting>(Configuration.GetSection("LineBotSetting"));
+
+            // 註冊自訂義 Filter
+            // 若 Controller 那使用 TypeFilter(可以帶參數) 就不需註冊
+            services.AddScoped<VerifySignatureFilter>();
 
             services.AddScoped<ITarotCardService, TarotCardService>();
 

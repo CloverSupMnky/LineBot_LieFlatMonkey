@@ -18,4 +18,6 @@
     <ProjectReference Include="..\..\5.Modules\LineBot_LieFlatMonkey.Modules\LineBot_LieFlatMonkey.Modules.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>

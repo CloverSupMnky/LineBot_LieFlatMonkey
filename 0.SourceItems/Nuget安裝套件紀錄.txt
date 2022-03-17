@@ -1,6 +1,8 @@
 1.Plugins -> LineBot_LieFlatMonkey.Plugins
 
 Microsoft.Extensions.Options 5.0.0
+Newtonsoft.Json 13.0.1
+Microsoft.AspNetCore.Mvc.NewtonsoftJson 5.0.0
 
 
 3.Entities -> LineBot_LieFlatMonkey.Entities
