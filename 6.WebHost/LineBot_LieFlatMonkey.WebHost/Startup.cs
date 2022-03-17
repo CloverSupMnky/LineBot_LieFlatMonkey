@@ -1,3 +1,4 @@
+using LineBot_LieFlatMonkey.Assets.Model.AppSetting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,14 @@ namespace LineBot_LieFlatMonkey.WebHost
         {
 
             services.AddControllers();
+
+            services.AddCors(options => 
+            options.AddPolicy("CorsPolicy",builder => 
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            }));
+
+            services.Configure<LineBotSetting>(Configuration.GetSection("LineBotSetting"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +49,8 @@ namespace LineBot_LieFlatMonkey.WebHost
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
