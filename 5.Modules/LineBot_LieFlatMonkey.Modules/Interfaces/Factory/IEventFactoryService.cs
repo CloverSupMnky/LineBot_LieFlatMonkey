@@ -16,6 +16,6 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces.Factory
         /// 處理事件
         /// </summary>
         /// <param name="eventInfo">Line Bot Event 物件</param>
-        void Invoke(Event eventInfo);
+        Task Invoke(Event eventInfo);
     }
 }

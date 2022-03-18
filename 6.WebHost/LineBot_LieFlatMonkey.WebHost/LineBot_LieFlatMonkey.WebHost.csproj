@@ -18,6 +18,12 @@
     <ProjectReference Include="..\..\5.Modules\LineBot_LieFlatMonkey.Modules\LineBot_LieFlatMonkey.Modules.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Template\TarotCardTemplate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

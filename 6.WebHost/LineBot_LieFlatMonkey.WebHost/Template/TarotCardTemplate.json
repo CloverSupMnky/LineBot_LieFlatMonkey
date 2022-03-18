@@ -1,0 +1,123 @@
+{
+    "type": "bubble",
+    "hero": {
+        "type": "image",
+        "url": "{#ImageUrl}",
+        "size": "full",
+        "aspectRatio": "4:3",
+        "aspectMode": "fit",
+        "align": "center"
+    },
+    "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "text",
+                "text": "{#Name}-{#NameEN}({#FaceType})",
+                "weight": "bold",
+                "size": "md",
+                "wrap": true,
+                "align": "center"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": " 塔羅牌意義 : ",
+                        "flex": 4,
+                        "weight": "bold"
+                    },
+                    {
+                        "type": "text",
+                        "text": "{#Mean}",
+                        "flex": 7,
+                        "weight": "bold"
+                    }
+                ],
+                "offsetStart": "25%"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "關鍵字 : ",
+                        "size": "md",
+                        "flex": 2,
+                        "weight": "bold"
+                    },
+                    {
+                        "type": "text",
+                        "text": "{#MeanWord}",
+                        "wrap": true,
+                        "flex": 6
+                    }
+                ]
+            },
+            {
+                "type": "text",
+                "text": "----------",
+                "align": "center"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "{#Desc}",
+                        "wrap": true
+                    }
+                ]
+            },
+            {
+                "type": "text",
+                "text": "----------",
+                "align": "center"
+            }
+        ],
+        "spacing": "sm"
+    },
+    "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+            {
+                "type": "text",
+                "text": "版權聲明",
+                "weight": "bold",
+                "size": "lg",
+                "align": "center"
+            },
+            {
+                "type": "text",
+                "text": "以上內容均為 Ta19 所有",
+                "align": "center",
+                "weight": "bold"
+            },
+            {
+                "type": "text",
+                "text": "更多相關內容歡迎至原作者網站查看",
+                "wrap": true,
+                "weight": "bold"
+            },
+            {
+                "type": "text",
+                "text": "https://ta19.site/",
+                "action": {
+                    "type": "uri",
+                    "label": "action",
+                    "uri": "https://ta19.site/"
+                },
+                "weight": "bold",
+                "align": "center"
+            }
+        ],
+        "offsetBottom": "xxl"
+    }
+}
