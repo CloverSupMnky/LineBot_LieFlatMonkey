@@ -66,6 +66,9 @@ namespace LineBot_LieFlatMonkey.WebHost
 
             services.AddScoped<ITarotCardService, TarotCardService>();
             services.AddScoped<IWebHookEventService, WebHookEventService>();
+            services.AddScoped<IHttpClientService, HttpClientService>();
+
+            #region 工廠類別註冊
 
             services.AddScoped<MessageEventService>();
             services.AddScoped<FollowEventService>();
@@ -84,9 +87,12 @@ namespace LineBot_LieFlatMonkey.WebHost
                         throw new Exception("Not valid key"); ;
                 }
             });
+
             services.AddScoped<EventFactory>();
 
-            #region Entity 注入
+            #endregion
+
+            #region Entity 註冊
 
             services.AddDbContext<LineBotLieFlatMonkeyContext>(options => options.UseNpgsql(Configuration.GetConnectionString("LineBotNpgsql")));
 

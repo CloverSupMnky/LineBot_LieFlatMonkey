@@ -8,7 +8,7 @@ using LineBot_LieFlatMonkey.Assets.Constant;
 
 namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
 {
-    public class TextResultMessage : BaseResultMessage
+    public class TextResultMessage : ResultMessage
     {
         [JsonProperty("type")]
         public string Type { get; set; } = MessageType.Text;

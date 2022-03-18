@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
 {
-    public class BaseResultMessage
+    public class ResultMessage
     {
         [JsonProperty("quickReply")]
         public Quickreply QuickReply { get; set; }
