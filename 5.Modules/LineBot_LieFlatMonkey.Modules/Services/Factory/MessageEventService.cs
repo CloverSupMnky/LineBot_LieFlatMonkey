@@ -49,7 +49,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         /// <param name="message">Line Bot Message 物件</param>
         private async Task TextMessage(Message message,string replyToken)
         {
-            List<ResultMessage> messages = new List<ResultMessage>();
+            List<ResultMessage> messages = null;
 
             switch (message.Text)
             {
@@ -61,13 +61,13 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     break;
             }
 
-            if(messages.Count == 0) 
+            if(messages == null) 
             {
                 // TODO 錯誤處理
                 return;
             }
 
-            await this.httpClientService.PushMessageAsync(messages);
+            await this.httpClientService.ReplyMessageAsync(messages, replyToken);
         }
 
         /// <summary>
@@ -82,14 +82,14 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             if (!File.Exists(filePath)) return null;
 
+            var tarotCard =
+                this.tarotCardService.FortuneTellingByType(fortuneTellingType);
+
             string jsonString = String.Empty;
-            using (var streamReader = new StreamReader(filePath, Encoding.UTF8))
+            using (var streamReader = new StreamReader(filePath,Encoding.UTF8))
             {
                 jsonString = await streamReader.ReadToEndAsync();
             }
-
-            var tarotCard = 
-                this.tarotCardService.FortuneTellingByType(fortuneTellingType);
 
             jsonString = jsonString.Replace("{#ImageUrl}", tarotCard.ImageUrl);
             jsonString = jsonString.Replace("{#Name}", tarotCard.Name);
@@ -103,7 +103,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             return new List<ResultMessage>()
             {
-                new FlexResultMessage(){ Contents = obj }
+                new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"}
             };
         }
     }

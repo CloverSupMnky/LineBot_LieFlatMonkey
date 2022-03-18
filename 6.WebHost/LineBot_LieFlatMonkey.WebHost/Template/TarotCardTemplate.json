@@ -21,23 +21,20 @@
                 "align": "center"
             },
             {
-                "type": "box",
-                "layout": "horizontal",
+                "type": "text",
                 "contents": [
                     {
-                        "type": "text",
-                        "text": " ¶ğÃ¹µP·N¸q : ",
-                        "flex": 4,
-                        "weight": "bold"
+                        "type": "span",
+                        "text": "å¡”ç¾…ç‰Œæ„ç¾© : "
                     },
                     {
-                        "type": "text",
-                        "text": "{#Mean}",
-                        "flex": 7,
-                        "weight": "bold"
+                        "type": "span",
+                        "text": "{#Mean}"
                     }
                 ],
-                "offsetStart": "25%"
+                "size": "md",
+                "weight": "bold",
+                "align": "center"
             },
             {
                 "type": "box",
@@ -45,7 +42,7 @@
                 "contents": [
                     {
                         "type": "text",
-                        "text": "ÃöÁä¦r : ",
+                        "text": "é—œéµå­— : ",
                         "size": "md",
                         "flex": 2,
                         "weight": "bold"
@@ -89,20 +86,38 @@
         "contents": [
             {
                 "type": "text",
-                "text": "ª©ÅvÁn©ú",
+                "text": "ç‰ˆæ¬Šè²æ˜",
                 "weight": "bold",
                 "size": "lg",
-                "align": "center"
-            },
-            {
-                "type": "text",
-                "text": "¥H¤W¤º®e§¡¬° Ta19 ©Ò¦³",
                 "align": "center",
-                "weight": "bold"
+                "color": "#FF3333"
             },
             {
                 "type": "text",
-                "text": "§ó¦h¬ÛÃö¤º®eÅwªï¦Ü­ì§@ªÌºô¯¸¬d¬İ",
+                "align": "center",
+                "weight": "bold",
+                "contents": [
+                    {
+                        "type": "span",
+                        "text": "ä»¥ä¸Šå…§å®¹å‡ç‚º "
+                    },
+                    {
+                        "type": "span",
+                        "text": "Ta19",
+                        "weight": "bold",
+                        "decoration": "underline",
+                        "size": "lg",
+                        "color": "#FF3333"
+                    },
+                    {
+                        "type": "span",
+                        "text": " æ‰€æœ‰"
+                    }
+                ]
+            },
+            {
+                "type": "text",
+                "text": "æ›´å¤šç›¸é—œå…§å®¹æ­¡è¿è‡³åŸä½œè€…ç¶²ç«™æŸ¥çœ‹",
                 "wrap": true,
                 "weight": "bold"
             },
@@ -115,9 +130,12 @@
                     "uri": "https://ta19.site/"
                 },
                 "weight": "bold",
-                "align": "center"
+                "align": "center",
+                "color": "#0000FF",
+                "decoration": "underline",
+                "size": "lg"
             }
         ],
-        "offsetBottom": "xxl"
+        "offsetBottom": "lg"
     }
 }
