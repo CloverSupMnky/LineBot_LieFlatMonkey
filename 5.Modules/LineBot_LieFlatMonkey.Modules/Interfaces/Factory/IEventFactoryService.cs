@@ -15,7 +15,7 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces.Factory
         /// <summary>
         /// 處理事件
         /// </summary>
-        /// <param name="webHookEvent">Line Bot 訊息物件</param>
-        void Invoke(WebHookEvent webHookEvent);
+        /// <param name="eventInfo">Line Bot Event 物件</param>
+        void Invoke(Event eventInfo);
     }
 }

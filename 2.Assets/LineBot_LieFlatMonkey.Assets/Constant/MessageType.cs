@@ -16,8 +16,6 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
 
         public const string Audio = "audio";
 
-        public const string File = "file";
-
         public const string Location = "location";
 
         public const string Sticker = "sticker";

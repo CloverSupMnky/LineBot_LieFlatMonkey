@@ -39,7 +39,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 {
                     var eventService = this.eventFactory.GetEventService(e.Type);
 
-                    eventService.Invoke(webHookEvent);
+                    eventService.Invoke(e);
                 }
             }
             catch(Exception ex) 
