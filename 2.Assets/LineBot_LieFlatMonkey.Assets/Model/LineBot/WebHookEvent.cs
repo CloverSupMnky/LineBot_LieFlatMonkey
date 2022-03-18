@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
 {
+    /// <summary>
+    /// Line Bot 訊息物件
+    /// </summary>
     public class WebHookEvent
     {
         [JsonProperty("destination")]

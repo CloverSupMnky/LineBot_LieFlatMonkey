@@ -21,6 +21,10 @@ using LineBot_LieFlatMonkey.Entities.Models;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using LineBot_LieFlatMonkey.Modules.Services;
 using LineBot_LieFlatMonkey.WebHost.Filters;
+using LineBot_LieFlatMonkey.Modules.Interfaces.Factory;
+using LineBot_LieFlatMonkey.Modules.Services.Factory;
+using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Modules.Factory;
 
 namespace LineBot_LieFlatMonkey.WebHost
 {
@@ -61,6 +65,26 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.AddScoped<VerifySignatureFilter>();
 
             services.AddScoped<ITarotCardService, TarotCardService>();
+            services.AddScoped<IWebHookEventService, WebHookEventService>();
+
+            services.AddScoped<MessageEventService>();
+            services.AddScoped<FollowEventService>();
+            services.AddScoped<JoinEventService>();
+            services.AddScoped<Func<string, IEventFactoryService>>(serviceProvider => type =>
+            {
+                switch (type)
+                {
+                    case EventType.Message:
+                        return serviceProvider.GetService<MessageEventService>();
+                    case EventType.Follow:
+                        return serviceProvider.GetService<FollowEventService>();
+                    case EventType.Join:
+                        return serviceProvider.GetService<JoinEventService>();
+                    default:
+                        throw new Exception("Not valid key"); ;
+                }
+            });
+            services.AddScoped<EventFactory>();
 
             #region Entity ª`¤J
 
