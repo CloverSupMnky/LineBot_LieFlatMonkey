@@ -65,6 +65,7 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.AddScoped<VerifySignatureFilter>();
 
             services.AddScoped<ITarotCardService, TarotCardService>();
+            services.AddScoped<IEnglishSentenceService, EnglishSentenceService>();
             services.AddScoped<IWebHookEventService, WebHookEventService>();
             services.AddScoped<IHttpClientService, HttpClientService>();
 
@@ -100,6 +101,8 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<ITrackableRepository<TarotCard>, TrackableRepository<TarotCard>>();
+
+            services.AddScoped<ITrackableRepository<EnglishSentence>, TrackableRepository<EnglishSentence>>();
 
             #endregion
         }
