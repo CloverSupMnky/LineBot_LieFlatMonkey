@@ -1,0 +1,52 @@
+{
+    "type": "bubble",
+    "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "image",
+                "url": "https://i.imgur.com/BkWct8r.jpg",
+                "position": "absolute",
+                "size": "full",
+                "aspectMode": "cover"
+            },
+            {
+                "type": "text",
+                "text": "{#Sentence}",
+                "weight": "bold",
+                "size": "lg",
+                "wrap": true,
+                "color": "#FFFFFF"
+            },
+            {
+                "type": "separator",
+                "color": "#FFFFFF",
+                "margin": "md"
+            },
+            {
+                "type": "text",
+                "text": "{#Translation}",
+                "wrap": true,
+                "size": "md",
+                "margin": "md",
+                "weight": "bold",
+                "color": "#FFFFFF"
+            },
+            {
+                "type": "text",
+                "text": "— {#Source} ({#SourceType})",
+                "size": "md",
+                "align": "end",
+                "offsetStart": "xxl",
+                "weight": "bold",
+                "margin": "md",
+                "style": "italic",
+                "color": "#FFFFFF"
+            }
+        ],
+        "cornerRadius": "none",
+        "justifyContent": "center",
+        "alignItems": "center"
+    }
+}
