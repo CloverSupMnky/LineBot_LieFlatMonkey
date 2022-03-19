@@ -7,6 +7,7 @@ namespace LineBot_LieFlatMonkey.Entities.Contexts
 {
     public partial class LineBotLieFlatMonkeyContext : DbContext
     {
+        public virtual DbSet<EnglishSentence> EnglishSentences { get; set; }
         public virtual DbSet<TarotCard> TarotCards { get; set; }
 
         public LineBotLieFlatMonkeyContext(DbContextOptions<LineBotLieFlatMonkeyContext> options) : base(options)
@@ -20,6 +21,41 @@ namespace LineBot_LieFlatMonkey.Entities.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<EnglishSentence>(entity =>
+            {
+                entity.HasKey(e => e.SeqNo)
+                    .HasName("EnglishSentence_pkey");
+
+                entity.ToTable("EnglishSentence");
+
+                entity.HasComment("英文短句資料表");
+
+                entity.Property(e => e.SeqNo)
+                    .HasComment("流水號")
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(null, null, null, 999L, null, null);
+
+                entity.Property(e => e.Sentence)
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasComment("英文句子");
+
+                entity.Property(e => e.Source)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasComment("句子出處");
+
+                entity.Property(e => e.SourceType)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .HasComment("句子出處類型");
+
+                entity.Property(e => e.Translation)
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasComment("英文翻譯");
+            });
+
             modelBuilder.Entity<TarotCard>(entity =>
             {
                 entity.HasKey(e => e.SeqNo)
