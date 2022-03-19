@@ -2,12 +2,12 @@
     "type": "bubble",
     "hero": {
         "type": "image",
-        "url": "{#ImageUrl}",
         "size": "full",
         "aspectRatio": "4:3",
         "aspectMode": "fit",
         "align": "center",
-        "backgroundColor": "#53565F"
+        "backgroundColor": "#53565F",
+        "url": "{#ImageUrl}"
     },
     "body": {
         "type": "box",
@@ -57,10 +57,9 @@
                 ]
             },
             {
-                "type": "text",
-                "text": "----------------------------------------",
-                "align": "center",
-                "color": "#53565F"
+                "type": "separator",
+                "color": "#000000",
+                "margin": "md"
             },
             {
                 "type": "box",
@@ -74,10 +73,9 @@
                 ]
             },
             {
-                "type": "text",
-                "text": "----------------------------------------",
-                "align": "center",
-                "color": "#53565F"
+                "type": "separator",
+                "color": "#000000",
+                "margin": "md"
             }
         ],
         "spacing": "sm"
