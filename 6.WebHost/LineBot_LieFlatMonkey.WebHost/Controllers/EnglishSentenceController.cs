@@ -1,4 +1,5 @@
-﻿using LineBot_LieFlatMonkey.Modules.Interfaces;
+﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Modules.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,9 +27,19 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
         }
 
         [HttpGet("[action]/{userId}")]
-        public IActionResult GetAudio(string userId) 
+        public IActionResult GetAudioByUserId(string userId) 
         {
-            return Ok();
+            var res = this.englishSentenceService.GetAudioByUserId(userId);
+
+            return File(res, "audio/m4a", EnglishSenteceFileNameType.Normal);
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult GetNotFoundAudio()
+        {
+            var res = this.englishSentenceService.GetNotFoundAudio();
+
+            return File(res, "audio/m4a", EnglishSenteceFileNameType.NotFound);
         }
     }
 }

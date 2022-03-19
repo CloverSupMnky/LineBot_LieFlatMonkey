@@ -17,5 +17,18 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// </summary>
         /// <returns></returns>
         EnglishSentenceResp GetSentence();
+
+        /// <summary>
+        /// 依使用者 Id 取得英文句子英頻檔
+        /// </summary>
+        /// <param name="userId">使用者 Id</param>
+        /// <returns></returns>
+        byte[] GetAudioByUserId(string userId);
+
+        /// <summary>
+        /// 取得無法正常取得使用者音頻檔提示音檔
+        /// </summary>
+        /// <returns></returns>
+        byte[] GetNotFoundAudio();
     }
 }
