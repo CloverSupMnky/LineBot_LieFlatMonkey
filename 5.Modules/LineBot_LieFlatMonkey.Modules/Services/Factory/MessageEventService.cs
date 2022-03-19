@@ -67,7 +67,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 return;
             }
 
-            await this.httpClientService.ReplyMessageAsync(messages, replyToken);
+            await this.httpClientService.ReplyMessageAsync(messages,replyToken);
         }
 
         /// <summary>
@@ -103,7 +103,9 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             return new List<ResultMessage>()
             {
-                new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"}
+                new TextResultMessage(){ Text = "運勢占卜結果"},
+                new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"},
+                new StickerResultMessage(){ StickerId = "16581294", PackageId = "8525"}
             };
         }
     }

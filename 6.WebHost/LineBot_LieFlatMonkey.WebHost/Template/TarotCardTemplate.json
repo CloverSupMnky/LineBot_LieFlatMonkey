@@ -6,7 +6,8 @@
         "size": "full",
         "aspectRatio": "4:3",
         "aspectMode": "fit",
-        "align": "center"
+        "align": "center",
+        "backgroundColor": "#53565F"
     },
     "body": {
         "type": "box",
@@ -57,8 +58,9 @@
             },
             {
                 "type": "text",
-                "text": "----------",
-                "align": "center"
+                "text": "----------------------------------------",
+                "align": "center",
+                "color": "#53565F"
             },
             {
                 "type": "box",
@@ -73,8 +75,9 @@
             },
             {
                 "type": "text",
-                "text": "----------",
-                "align": "center"
+                "text": "----------------------------------------",
+                "align": "center",
+                "color": "#53565F"
             }
         ],
         "spacing": "sm"
