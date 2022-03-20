@@ -7,46 +7,60 @@
             {
                 "type": "image",
                 "url": "https://i.imgur.com/BkWct8r.jpg",
-                "position": "absolute",
                 "size": "full",
-                "aspectMode": "cover"
+                "aspectMode": "cover",
+                "aspectRatio": "2.3:3",
+                "gravity": "top"
             },
             {
-                "type": "text",
-                "text": "{#Sentence}",
-                "weight": "bold",
-                "size": "lg",
-                "wrap": true,
-                "color": "#FFFFFF"
-            },
-            {
-                "type": "separator",
-                "color": "#FFFFFF",
-                "margin": "md"
-            },
-            {
-                "type": "text",
-                "text": "{#Translation}",
-                "wrap": true,
-                "size": "md",
-                "margin": "md",
-                "weight": "bold",
-                "color": "#FFFFFF"
-            },
-            {
-                "type": "text",
-                "text": "— {#Source} ({#SourceType})",
-                "size": "md",
-                "align": "end",
-                "offsetStart": "xxl",
-                "weight": "bold",
-                "margin": "md",
-                "style": "italic",
-                "color": "#FFFFFF"
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "{#Sentence}",
+                        "color": "#ffffff",
+                        "wrap": true,
+                        "margin": "md",
+                        "size": "lg",
+                        "weight": "bold",
+                        "align": "center"
+                    },
+                    {
+                        "type": "separator",
+                        "color": "#ffffff",
+                        "margin": "md"
+                    },
+                    {
+                        "type": "text",
+                        "text": "{#Translation}",
+                        "color": "#ffffff",
+                        "wrap": true,
+                        "align": "center",
+                        "margin": "md",
+                        "size": "md",
+                        "weight": "bold"
+                    },
+                    {
+                        "type": "text",
+                        "text": "— {#Source} ({#SourceType})",
+                        "color": "#ffffff",
+                        "wrap": true,
+                        "align": "end",
+                        "style": "italic",
+                        "margin": "md",
+                        "offsetEnd": "10px"
+                    }
+                ],
+                "position": "absolute",
+                "offsetStart": "0px",
+                "offsetEnd": "0px",
+                "offsetBottom": "0px",
+                "offsetTop": "0px",
+                "paddingAll": "10px",
+                "backgroundColor": "#03303A80"
             }
         ],
-        "cornerRadius": "none",
-        "justifyContent": "center",
-        "alignItems": "center"
+        "paddingAll": "0px"
     }
 }

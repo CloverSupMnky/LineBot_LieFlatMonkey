@@ -31,7 +31,7 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
         {
             var res = this.englishSentenceService.GetAudioByReplyToken(replyToken);
 
-            return File(res, "audio/m4a", EnglishSenteceFileNameType.Normal);
+            return File(res, "audio/aac", EnglishSenteceFileNameType.NormalAAC);
         }
 
         [HttpGet("[action]")]
@@ -39,7 +39,7 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
         {
             var res = this.englishSentenceService.GetNotFoundAudio();
 
-            return File(res, "audio/m4a", EnglishSenteceFileNameType.NotFound);
+            return File(res, "audio/aac", EnglishSenteceFileNameType.NotFoundAAC);
         }
     }
 }

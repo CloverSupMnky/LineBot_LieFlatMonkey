@@ -14,5 +14,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         public const string Media = "Media";
 
         public const string Template = "Template";
+
+        public const string ToolKit = "ToolKit";
     }
 }

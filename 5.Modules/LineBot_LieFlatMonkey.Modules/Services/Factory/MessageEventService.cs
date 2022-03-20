@@ -77,7 +77,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 return;
             }
 
-            await this.httpClientService.PushMessageAsync(messages);
+            await this.httpClientService.ReplyMessageAsync(messages,replyToken);
         }
 
         /// <summary>

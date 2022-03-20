@@ -5,6 +5,7 @@ Newtonsoft.Json 13.0.1
 Microsoft.AspNetCore.Mvc.NewtonsoftJson 5.0.0
 Microsoft.CognitiveServices.Speech 1.20.0 (微軟智能語音服務)
 TagLibSharp 2.2.0 (讀取音頻檔長度)
+MediaToolkit.NetCore 0.1.0 搶鮮版(wav 轉 aac 檔)
 
 
 

@@ -2,6 +2,8 @@
 using LineBot_LieFlatMonkey.Assets.Model.Resp;
 using LineBot_LieFlatMonkey.Entities.Models;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
+using MediaToolkit;
+using MediaToolkit.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -106,15 +108,36 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// <returns></returns>
         private byte[] GetAudioBytes(string audioPath) 
         {
-            using (var fileStream = new FileStream(audioPath, FileMode.Open, FileAccess.Read))
+            var ffmpegFilePath = Path.Combine(
+                Environment.CurrentDirectory, DirName.ToolKit, "ffmpeg.exe");
+
+            var tempFilePath = Path.Combine(
+                        Environment.CurrentDirectory,
+                        DirName.Media,
+                        EnglishSenteceFileNameType.TempAAC
+                        );
+
+            using (var engine = new Engine(ffmpegFilePath))
+            {
+                engine.Convert(new MediaFile(audioPath), new MediaFile(tempFilePath));
+            }
+
+            byte[] res = null;
+
+            using (var fileStream = new FileStream(
+                tempFilePath, FileMode.Open, FileAccess.Read))
             {
                 using (var reader = new BinaryReader(fileStream))
                 {
-                    var length = Convert.ToInt32(new FileInfo(audioPath).Length);
+                    var length = Convert.ToInt32(new FileInfo(tempFilePath).Length);
 
-                    return reader.ReadBytes(length);
+                    res = reader.ReadBytes(length);
                 }
             }
+
+            File.Delete(tempFilePath);
+
+            return res;
         }
     }
 }
