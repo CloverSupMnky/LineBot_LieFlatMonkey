@@ -18,5 +18,12 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="userId">使用者 Id</param>
         /// <returns></returns>
         Task<bool> GenAudioAndSave(string text,string userId);
+
+        /// <summary>
+        /// 取得音頻檔長度
+        /// </summary>
+        /// <param name="fileName">檔案路徑</param>
+        /// <returns></returns>
+        int GetAudioLength(string path);
     }
 }

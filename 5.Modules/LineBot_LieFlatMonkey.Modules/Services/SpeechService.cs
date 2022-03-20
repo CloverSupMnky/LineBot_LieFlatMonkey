@@ -114,5 +114,17 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
             return speechConfig;
         }
+
+        /// <summary>
+        /// 取得音頻檔長度
+        /// </summary>
+        /// <param name="fileName">檔案路徑</param>
+        /// <returns></returns>
+        public int GetAudioLength(string path)
+        {
+            //讀取語音時間
+            return Convert.ToInt32(
+                TagLib.File.Create(path).Properties.Duration.TotalMilliseconds);
+        }
     }
 }
