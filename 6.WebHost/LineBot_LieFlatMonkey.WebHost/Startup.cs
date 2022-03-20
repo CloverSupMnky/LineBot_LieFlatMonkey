@@ -59,6 +59,7 @@ namespace LineBot_LieFlatMonkey.WebHost
             );
 
             services.Configure<LineBotSetting>(Configuration.GetSection("LineBotSetting"));
+            services.Configure<SpeechSetting>(Configuration.GetSection("SpeechSetting"));
 
             // 註冊自訂義 Filter
             // 若 Controller 那使用 TypeFilter(可以帶參數) 就不需註冊
@@ -66,6 +67,7 @@ namespace LineBot_LieFlatMonkey.WebHost
 
             services.AddScoped<ITarotCardService, TarotCardService>();
             services.AddScoped<IEnglishSentenceService, EnglishSentenceService>();
+            services.AddScoped<ISpeechService, SpeechService>();
             services.AddScoped<IWebHookEventService, WebHookEventService>();
             services.AddScoped<IHttpClientService, HttpClientService>();
 

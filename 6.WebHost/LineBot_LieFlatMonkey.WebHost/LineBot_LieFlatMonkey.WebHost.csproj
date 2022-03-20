@@ -31,6 +31,12 @@
     <Folder Include="Media\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Media\filenotfound.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

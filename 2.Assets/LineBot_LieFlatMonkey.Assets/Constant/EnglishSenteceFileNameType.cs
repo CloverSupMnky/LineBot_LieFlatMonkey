@@ -14,11 +14,11 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         /// <summary>
         /// 正常取得音頻檔檔名
         /// </summary>
-        public const string Normal = "englishsentence";
+        public const string Normal = "englishsentence.wav";
 
         /// <summary>
         /// 無法取得使用者對應音頻檔檔名
         /// </summary>
-        public const string NotFound = "filenotfound.mp3";
+        public const string NotFound = "filenotfound.wav";
     }
 }

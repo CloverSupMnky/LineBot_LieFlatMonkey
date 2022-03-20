@@ -72,10 +72,12 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
             var audioPath = Path.Combine(
                     Environment.CurrentDirectory,
-                    EnglishSenteceDirName.Domain, 
-                    $"{userId}", 
+                    EnglishSenteceDirName.Domain,
+                    userId, 
                     EnglishSenteceFileNameType.Normal
                     );
+
+            if (!File.Exists(audioPath)) return this.GetNotFoundAudio();
 
             return this.GetAudioBytes(audioPath);
         }
