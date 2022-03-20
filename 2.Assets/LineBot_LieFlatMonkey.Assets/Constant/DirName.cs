@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 namespace LineBot_LieFlatMonkey.Assets.Constant
 {
     /// <summary>
-    /// 音頻檔資料夾名稱
+    /// 專案資料夾名稱
     /// </summary>
-    public class EnglishSenteceDirName
+    public class DirName
     {
-        public const string Domain = "Media";
+        public const string Media = "Media";
+
+        public const string Template = "Template";
     }
 }

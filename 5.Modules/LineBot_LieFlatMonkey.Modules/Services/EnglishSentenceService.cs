@@ -64,16 +64,16 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// <summary>
         /// 取得英文句子英頻檔
         /// </summary>
-        /// <param name="userId">使用者 Id</param>
+        /// <param name="replyToken">使用者 Id</param>
         /// <returns></returns>
-        public byte[] GetAudioByUserId(string userId)
+        public byte[] GetAudioByReplyToken(string replyToken)
         {
             // https://translate.google.com/translate_tts?ie=UTF-8&tl=zh_tw&client=tw-ob&ttsspeed=1&q=文字轉語音連結參考連結
 
             var audioPath = Path.Combine(
                     Environment.CurrentDirectory,
-                    EnglishSenteceDirName.Domain,
-                    userId, 
+                    DirName.Media,
+                    replyToken, 
                     EnglishSenteceFileNameType.Normal
                     );
 
@@ -92,7 +92,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
             var audioPath = Path.Combine(
                         Environment.CurrentDirectory,
-                        EnglishSenteceDirName.Domain,
+                        DirName.Media,
                         EnglishSenteceFileNameType.NotFound
                         );
 

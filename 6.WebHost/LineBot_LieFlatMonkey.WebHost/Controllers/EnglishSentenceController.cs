@@ -26,10 +26,10 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
             return Success(res);
         }
 
-        [HttpGet("[action]/{userId}")]
-        public IActionResult GetAudioByUserId(string userId) 
+        [HttpGet("[action]/{replyToken}")]
+        public IActionResult GetAudioByReplyToken(string replyToken) 
         {
-            var res = this.englishSentenceService.GetAudioByUserId(userId);
+            var res = this.englishSentenceService.GetAudioByReplyToken(replyToken);
 
             return File(res, "audio/m4a", EnglishSenteceFileNameType.Normal);
         }

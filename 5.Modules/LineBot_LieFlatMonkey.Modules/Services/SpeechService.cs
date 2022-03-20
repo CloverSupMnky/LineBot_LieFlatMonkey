@@ -29,9 +29,9 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// 產生對應文字音檔並儲存對應使用者檔案路徑
         /// </summary>
         /// <param name="text">輸入文字</param>
-        /// <param name="userId">使用者 Id</param>
+        /// <param name="replyToken">使用者 replyToken</param>
         /// <returns></returns>
-        public async Task<bool> GenAudioAndSave(string text, string userId)
+        public async Task<bool> GenAudioAndSave(string text, string replyToken)
         {
             // 設定語音服務設定
             var config = this.GetSpeechConfig();
@@ -40,8 +40,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             {
                 var dirPath = Path.Combine(
                         Environment.CurrentDirectory,
-                        EnglishSenteceDirName.Domain,
-                        userId);
+                        DirName.Media,
+                        replyToken);
 
                 // 資料夾不存在就新增
                 if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
@@ -122,9 +122,14 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// <returns></returns>
         public int GetAudioLength(string path)
         {
-            //讀取語音時間
-            return Convert.ToInt32(
-                TagLib.File.Create(path).Properties.Duration.TotalMilliseconds);
+            var res = 0;
+            using (var file = TagLib.File.Create(path)) 
+            {
+                //讀取語音時間
+                res = Convert.ToInt32(file.Properties.Duration.TotalMilliseconds);
+            }
+
+            return res;
         }
     }
 }

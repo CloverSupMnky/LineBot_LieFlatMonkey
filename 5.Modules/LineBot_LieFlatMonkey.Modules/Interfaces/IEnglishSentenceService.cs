@@ -21,9 +21,9 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <summary>
         /// 依使用者 Id 取得英文句子英頻檔
         /// </summary>
-        /// <param name="userId">使用者 Id</param>
+        /// <param name="replyToken">使用者 replyToken</param>
         /// <returns></returns>
-        byte[] GetAudioByUserId(string userId);
+        byte[] GetAudioByReplyToken(string replyToken);
 
         /// <summary>
         /// 取得無法正常取得使用者音頻檔提示音檔
