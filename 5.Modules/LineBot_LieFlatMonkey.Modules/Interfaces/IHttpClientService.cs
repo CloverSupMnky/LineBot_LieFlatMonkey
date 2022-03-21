@@ -26,5 +26,12 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="replyToken">回覆訊息的 replyToken </param>
         /// <returns></returns>
         Task ReplyMessageAsync(List<ResultMessage> messages,string replyToken);
+
+        /// <summary>
+        /// 依曲風類型取得音樂推薦列表
+        /// </summary>
+        /// <param name="musicCate">曲風類型</param>
+        /// <returns></returns>
+        Task GetMusicListByMusicCateTypeAsync(string musicCate);
     }
 }

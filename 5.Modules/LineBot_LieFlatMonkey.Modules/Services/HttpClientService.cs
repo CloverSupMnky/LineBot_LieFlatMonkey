@@ -99,5 +99,27 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
             var resp = await this.httpClient.SendAsync(httpReqMsg);
         }
+
+        /// <summary>
+        /// 依曲風類型取得音樂推薦列表
+        /// </summary>
+        /// <param name="musicCate">曲風類型</param>
+        /// <returns></returns>
+        public async Task GetMusicListByMusicCateTypeAsync(string musicCate)
+        {
+            string url = $"https://kma.kkbox.com/charts/daily/song?cate={musicCate}&lang=tc&terr=tw";
+
+            //發送請求並取得回應內容
+            var responseMessage = await httpClient.GetAsync(url);
+
+            //檢查回應的伺服器狀態StatusCode是否是200 OK
+            if (responseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                //讀取Content內容
+                string responseResult = await responseMessage.Content.ReadAsStringAsync();
+
+                Console.WriteLine(responseResult);
+            }
+        }
     }
 }
