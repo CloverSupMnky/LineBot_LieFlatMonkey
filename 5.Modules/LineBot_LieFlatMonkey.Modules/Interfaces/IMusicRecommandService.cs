@@ -15,6 +15,6 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <summary>
         /// 推薦音樂
         /// </summary>
-        Task<MusicRecommandResp> Recommand();
+        MusicRecommandResp Recommand();
     }
 }

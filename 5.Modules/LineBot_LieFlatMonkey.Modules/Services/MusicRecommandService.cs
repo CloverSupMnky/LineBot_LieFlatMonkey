@@ -1,4 +1,5 @@
 ﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Assets.Model;
 using LineBot_LieFlatMonkey.Assets.Model.Resp;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using System;
@@ -14,7 +15,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     /// </summary>
     public class MusicRecommandService : IMusicRecommandService
     {
-        private readonly IHttpClientService httpClientService;
+        private readonly IWebDriverService webDriverService;
         private readonly ICommonService commonService;
 
         /// <summary>
@@ -26,12 +27,14 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// 5-台語
         /// </summary>
         private readonly Dictionary<int, string> musicCateTypeDic;
+        private readonly Dictionary<int, string> musicCateStrTypeDic;
+
 
         public MusicRecommandService(
-            IHttpClientService httpClientService, 
+            IWebDriverService webDriverService, 
             ICommonService commonService)
         {
-            this.httpClientService = httpClientService;
+            this.webDriverService = webDriverService;
             this.commonService = commonService;
 
             musicCateTypeDic = new Dictionary<int, string>()
@@ -42,19 +45,44 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 {4,MusicCateType.Korea},
                 {5,MusicCateType.Taiwanese}
             };
+
+            musicCateStrTypeDic = new Dictionary<int, string>()
+            {
+                {1,MusicCateStrType.Chinese},
+                {2,MusicCateStrType.Western},
+                {3,MusicCateStrType.Japan},
+                {4,MusicCateStrType.Korea},
+                {5,MusicCateStrType.Taiwanese}
+            };
         }
 
         /// <summary>
         /// 推薦音樂
         /// </summary>
-        public async Task<MusicRecommandResp> Recommand()
+        public MusicRecommandResp Recommand()
         {
-            var musicCate = 
-                this.musicCateTypeDic[this.commonService.GetRandomNo(this.musicCateTypeDic.Count)];
+            var no = this.commonService.GetRandomNo(this.musicCateTypeDic.Count);
 
-            await this.httpClientService.GetMusicListByMusicCateTypeAsync(musicCate);
+            var musicCate = this.musicCateTypeDic[no];
+
+            List<MusicRecommandMusicInfo> muscList = 
+                this.webDriverService.GetMusicListByMusicCateType(musicCate);
+
+            MusicRecommandMusicInfo musicInfo = new MusicRecommandMusicInfo();
+            MusicRecommandVideoInfo videoInfo = new MusicRecommandVideoInfo();
+            if (muscList.Count > 0)
+            {
+                musicInfo = muscList[this.commonService.GetRandomNo(muscList.Count) - 1];
+                videoInfo = this.webDriverService.GetVideoInfoByMusicInfo(musicInfo);
+            }
 
             var res = new MusicRecommandResp();
+
+            res.Artist = musicInfo.Artist;
+            res.Song = musicInfo.Song;
+            res.VideoUrl = videoInfo.VideoUrl;
+            res.ImageUrl = videoInfo.ImageUrl;
+            res.SongType = this.musicCateStrTypeDic[no];
 
             return res;
         }

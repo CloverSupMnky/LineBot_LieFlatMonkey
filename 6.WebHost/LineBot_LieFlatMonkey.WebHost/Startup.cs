@@ -70,6 +70,7 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.AddScoped<IEnglishSentenceService, EnglishSentenceService>();
             services.AddScoped<IMusicRecommandService, MusicRecommandService>();
             services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<IWebDriverService, WebDriverService>();
             services.AddScoped<ISpeechService, SpeechService>();
             services.AddScoped<IWebHookEventService, WebHookEventService>();
             services.AddScoped<IHttpClientService, HttpClientService>();
