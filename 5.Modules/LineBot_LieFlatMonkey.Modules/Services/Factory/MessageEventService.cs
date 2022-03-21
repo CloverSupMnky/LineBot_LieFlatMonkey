@@ -180,7 +180,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     EnglishSenteceFileNameType.Normal
                     );
 
-            var apiUrl = @"https://linebotlieflatmonkey.herokuapp.com/api/EnglishSentence/GetAudioByReplyToken/";
+            var apiUrl = @"https://linebotlieflatmonkey.azurewebsites.net/api/EnglishSentence/GetAudioByReplyToken/";
 
 #if DEBUG
             apiUrl = @"https://localhost:44346/api/EnglishSentence/GetAudioByReplyToken/";
@@ -203,7 +203,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                         EnglishSenteceFileNameType.NotFound
                         );
 
-            var apiUrl = @"https://linebotlieflatmonkey.herokuapp.com/api/EnglishSentence/GetNotFoundAudio";
+            var apiUrl = @"https://linebotlieflatmonkey.azurewebsites.net/api/EnglishSentence/GetNotFoundAudio";
 
 #if DEBUG
             apiUrl = @"https://localhost:44346/api/EnglishSentence/GetNotFoundAudio";

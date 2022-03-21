@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\1.Plugins\LineBot_LieFlatMonkey.Plugins\LineBot_LieFlatMonkey.Plugins.csproj" />
     <ProjectReference Include="..\..\2.Assets\LineBot_LieFlatMonkey.Assets\LineBot_LieFlatMonkey.Assets.csproj" />
     <ProjectReference Include="..\..\3.Entities\LineBot_LieFlatMonkey.Entities\LineBot_LieFlatMonkey.Entities.csproj" />
@@ -36,7 +32,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ToolKit\ffmpeg.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
