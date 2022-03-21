@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace LineBot_LieFlatMonkey.Modules.Services
 {
+    /// <summary>
+    /// 音樂推薦 Service
+    /// </summary>
     public class MusicRecommandService : IMusicRecommandService
     {
         private readonly IHttpClientService httpClientService;

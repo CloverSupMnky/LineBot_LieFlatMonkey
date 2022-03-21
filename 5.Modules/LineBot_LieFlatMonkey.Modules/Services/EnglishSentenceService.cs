@@ -20,10 +20,14 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     public class EnglishSentenceService : IEnglishSentenceService
     {
         private readonly ITrackableRepository<EnglishSentence> englishSentenceRepo;
+        private readonly ICommonService commonService;
 
-        public EnglishSentenceService(ITrackableRepository<EnglishSentence> englishSentenceRepo)
+        public EnglishSentenceService(
+            ITrackableRepository<EnglishSentence> englishSentenceRepo,
+            ICommonService commonService)
         {
             this.englishSentenceRepo = englishSentenceRepo;
+            this.commonService = commonService;
         }
 
         /// <summary>
@@ -58,9 +62,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         {
            var totalCount = this.englishSentenceRepo.Queryable().Count();
 
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-
-            return random.Next(1,totalCount + 1);
+            return this.commonService.GetRandomNo(totalCount);
         }
 
         /// <summary>

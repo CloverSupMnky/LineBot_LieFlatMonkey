@@ -69,6 +69,7 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.AddScoped<ITarotCardService, TarotCardService>();
             services.AddScoped<IEnglishSentenceService, EnglishSentenceService>();
             services.AddScoped<IMusicRecommandService, MusicRecommandService>();
+            services.AddScoped<ICommonService, CommonService>();
             services.AddScoped<ISpeechService, SpeechService>();
             services.AddScoped<IWebHookEventService, WebHookEventService>();
             services.AddScoped<IHttpClientService, HttpClientService>();

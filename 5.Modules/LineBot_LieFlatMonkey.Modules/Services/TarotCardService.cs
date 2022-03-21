@@ -17,6 +17,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     public class TarotCardService : ITarotCardService
     {
         private readonly ITrackableRepository<TarotCard> tarotCardRepo;
+        private readonly ICommonService commonService;
 
         /// <summary>
         /// 塔羅牌正、逆位判斷字典
@@ -25,9 +26,12 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// </summary>
         private readonly Dictionary<bool, string> tarotCardFaceTypeDic;
 
-        public TarotCardService(ITrackableRepository<TarotCard> tarotCardRepo)
+        public TarotCardService(
+            ITrackableRepository<TarotCard> tarotCardRepo, 
+            ICommonService commonService)
         {
             this.tarotCardRepo = tarotCardRepo;
+            this.commonService = commonService;
 
             tarotCardFaceTypeDic = new Dictionary<bool, string>()
             {
@@ -129,11 +133,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// <returns></returns>
         private int GetTarotCardNo(string fortuneTellingType)
         {
-            // 以 Guid 的 HashCode 作為亂數種子
-            Random rnd = new Random(Guid.NewGuid().GetHashCode());
-
             // 取得編碼 1-78 任一數字
-            var cardNo = rnd.Next(1, 79);
+            var cardNo = this.commonService.GetRandomNo(79);
 
             // 若為每日運勢不執行轉換負號邏輯
             if (fortuneTellingType == FortuneTellingType.Daily) 
