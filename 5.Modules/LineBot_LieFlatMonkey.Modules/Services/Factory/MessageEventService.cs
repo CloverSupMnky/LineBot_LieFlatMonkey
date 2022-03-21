@@ -1,8 +1,10 @@
 ﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Assets.Model.AppSetting;
 using LineBot_LieFlatMonkey.Assets.Model.LineBot;
 using LineBot_LieFlatMonkey.Assets.Model.Resp;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using LineBot_LieFlatMonkey.Modules.Interfaces.Factory;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -23,17 +25,20 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         private readonly ITarotCardService tarotCardService;
         private readonly IEnglishSentenceService englishSentenceService;
         private readonly ISpeechService speechService;
+        private readonly IOptions<ApiDomainSetting> apiDomainSetting;
 
         public MessageEventService(
             IHttpClientService httpClientService,
             ITarotCardService tarotCardService,
             IEnglishSentenceService englishSentenceService,
-            ISpeechService speechService)
+            ISpeechService speechService,
+            IOptions<ApiDomainSetting> apiDomainSetting)
         {
             this.httpClientService = httpClientService;
             this.tarotCardService = tarotCardService;
             this.englishSentenceService = englishSentenceService;
             this.speechService = speechService;
+            this.apiDomainSetting = apiDomainSetting;
         }
 
         /// <summary>
@@ -180,10 +185,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     EnglishSenteceFileNameType.Normal
                     );
 
-            var apiUrl = @"https://linebotlieflatmonkey.azurewebsites.net/api/EnglishSentence/GetAudioByReplyToken/";
+            var apiUrl = $"{this.apiDomainSetting.Value.Product}/api/EnglishSentence/GetAudioByReplyToken/";
 
 #if DEBUG
-            apiUrl = @"https://localhost:44346/api/EnglishSentence/GetAudioByReplyToken/";
+            apiUrl = $"{this.apiDomainSetting.Value.Develop}/api/EnglishSentence/GetAudioByReplyToken/";
 #endif
 
             return this.GetAudioResultMessage(
@@ -203,10 +208,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                         EnglishSenteceFileNameType.NotFound
                         );
 
-            var apiUrl = @"https://linebotlieflatmonkey.azurewebsites.net/api/EnglishSentence/GetNotFoundAudio";
+            var apiUrl = @$"{this.apiDomainSetting.Value.Product}/api/EnglishSentence/GetNotFoundAudio";
 
 #if DEBUG
-            apiUrl = @"https://localhost:44346/api/EnglishSentence/GetNotFoundAudio";
+            apiUrl = @$"{this.apiDomainSetting.Value.Develop}/api/EnglishSentence/GetNotFoundAudio";
 #endif
 
             return this.GetAudioResultMessage(

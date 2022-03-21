@@ -60,6 +60,7 @@ namespace LineBot_LieFlatMonkey.WebHost
 
             services.Configure<LineBotSetting>(Configuration.GetSection("LineBotSetting"));
             services.Configure<SpeechSetting>(Configuration.GetSection("SpeechSetting"));
+            services.Configure<ApiDomainSetting>(Configuration.GetSection("ApiDomainSetting"));
 
             // 註冊自訂義 Filter
             // 若 Controller 那使用 TypeFilter(可以帶參數) 就不需註冊
