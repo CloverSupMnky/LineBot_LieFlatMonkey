@@ -1,7 +1,5 @@
 ﻿using LineBot_LieFlatMonkey.Assets.Model;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,28 +24,28 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
             try 
             {
-                using (IWebDriver driver = new ChromeDriver(Path.Combine(Environment.CurrentDirectory, "WebDriver")))
-                {
-                    driver.Navigate().GoToUrl(url);
+                //using (IWebDriver driver = new ChromeDriver(Path.Combine(Environment.CurrentDirectory, "WebDriver")))
+                //{
+                //    driver.Navigate().GoToUrl(url);
 
-                    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-                    var divElements = driver
-                        .FindElements(By.CssSelector("div.flipper-item.layer1 > span.charts-list-desc"));
+                //    var divElements = driver
+                //        .FindElements(By.CssSelector("div.flipper-item.layer1 > span.charts-list-desc"));
 
-                    string song = string.Empty;
-                    var artist = string.Empty;
-                    foreach (var divElement in divElements)
-                    {
-                        song = divElement.FindElement(By.ClassName("charts-list-song")).Text;
+                //    string song = string.Empty;
+                //    var artist = string.Empty;
+                //    foreach (var divElement in divElements)
+                //    {
+                //        song = divElement.FindElement(By.ClassName("charts-list-song")).Text;
 
-                        artist = divElement.FindElement(By.ClassName("charts-list-artist")).Text;
+                //        artist = divElement.FindElement(By.ClassName("charts-list-artist")).Text;
 
-                        res.Add(new MusicRecommandMusicInfo() { Song = song, Artist = artist });
-                    }
+                //        res.Add(new MusicRecommandMusicInfo() { Song = song, Artist = artist });
+                //    }
 
-                    driver.Quit();
-                }
+                //    driver.Quit();
+                //}
 
                 return res;
             }
@@ -69,26 +67,26 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
             try
             {
-                using (IWebDriver driver = new ChromeDriver(Path.Combine(Environment.CurrentDirectory, "WebDriver")))
-                {
-                    driver.Navigate().GoToUrl(url);
+                //using (IWebDriver driver = new ChromeDriver(Path.Combine(Environment.CurrentDirectory, "WebDriver")))
+                //{
+                //    driver.Navigate().GoToUrl(url);
 
-                    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-                    var ytdElement = driver
-                        .FindElements(By.CssSelector("ytd-video-renderer.style-scope.ytd-item-section-renderer > div > ytd-thumbnail")).FirstOrDefault();
+                //    var ytdElement = driver
+                //        .FindElements(By.CssSelector("ytd-video-renderer.style-scope.ytd-item-section-renderer > div > ytd-thumbnail")).FirstOrDefault();
 
-                    if(ytdElement != null) 
-                    {
-                        var aElement = ytdElement.FindElement(By.TagName("a"));
-                        res.VideoUrl = $"https://www.youtube.com{aElement.GetDomAttribute("href")}";
+                //    if(ytdElement != null) 
+                //    {
+                //        var aElement = ytdElement.FindElement(By.TagName("a"));
+                //        res.VideoUrl = $"https://www.youtube.com{aElement.GetDomAttribute("href")}";
 
-                        var imgElement = ytdElement.FindElement(By.TagName("img"));
-                        res.ImageUrl = imgElement.GetDomAttribute("src");
-                    }
+                //        var imgElement = ytdElement.FindElement(By.TagName("img"));
+                //        res.ImageUrl = imgElement.GetDomAttribute("src");
+                //    }
 
-                    driver.Quit();
-                }
+                //    driver.Quit();
+                //}
 
                 return res;
             }

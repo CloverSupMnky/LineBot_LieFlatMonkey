@@ -4,8 +4,6 @@ using LineBot_LieFlatMonkey.Assets.Model.LineBot;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.IO;
