@@ -18,5 +18,17 @@ namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
 
         [JsonProperty("text")]
         public string Text { get; set; }
+
+        [JsonProperty("title")]
+        public string Title { get; set; }
+
+        [JsonProperty("address")]
+        public string Address { get; set; }
+
+        [JsonProperty("latitude")]
+        public string Latitude { get; set; }
+
+        [JsonProperty("longitude")]
+        public string Longitude { get; set; }
     }
 }
