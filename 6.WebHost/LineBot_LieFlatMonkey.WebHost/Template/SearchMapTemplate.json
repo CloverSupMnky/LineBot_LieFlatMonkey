@@ -1,0 +1,104 @@
+{
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "url": "{#ImageUrl}",
+    "size": "full",
+    "aspectMode": "cover",
+    "aspectRatio": "320:213"
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "{#StoreName}",
+        "weight": "bold",
+        "size": "md",
+        "wrap": true
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "wrap": true,
+                "color": "#8c8c8c",
+                "size": "sm",
+                "flex": 5,
+                "contents": [
+                  {
+                    "type": "span",
+                    "text": "Google 評分 : ",
+                    "weight": "bold"
+                  },
+                  {
+                    "type": "span",
+                    "text": "{#Rating}",
+                    "color": "#FBBC04",
+                    "weight": "bold",
+                    "decoration": "underline"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "contents": [
+          {
+            "type": "span",
+            "text": "地址 : "
+          },
+          {
+            "type": "span",
+            "text": "{#Address}"
+          }
+        ],
+        "flex": 5,
+        "size": "sm",
+        "wrap": true,
+        "weight": "bold",
+        "margin": "md"
+      }
+    ],
+    "spacing": "sm",
+    "paddingAll": "13px"
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "查看地圖",
+          "uri": "{#MapUrl}"
+        },
+        "style": "link",
+        "color": "#007BFF"
+      }
+    ],
+    "borderWidth": "1px",
+    "borderColor": "#ffffff",
+    "cornerRadius": "xl",
+    "justifyContent": "center",
+    "alignItems": "center",
+    "paddingAll": "none",
+    "action": {
+      "type": "uri",
+      "label": "action",
+      "uri": "{#MapUrl}"
+    }
+  }
+}

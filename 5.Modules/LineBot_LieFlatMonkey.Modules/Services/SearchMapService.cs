@@ -32,7 +32,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// <param name="searchWord">查詢文字</param>
         /// <param name="latitude">緯度</param>
         /// <param name="longitude">經度</param>
-        public async Task<IEnumerable<MapInfoResp>> SearchMap(
+        public async Task<List<MapInfoResp>> SearchMap(
             string searchWord, string latitude, string longitude)
         {
             var searchRes = await this.httpClientService.SearchMapAsync(searchWord, latitude, longitude);
@@ -42,7 +42,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 .OrderByDescending(r => r.rating)
                 .Where(r => r.photos != null && r.photos.Length > 0)
                 .Take(5)
-                .Select(r => this.ParseMapInfo(r));
+                .Select(r => this.ParseMapInfo(r))
+                .ToList();
 
             return res;
         }

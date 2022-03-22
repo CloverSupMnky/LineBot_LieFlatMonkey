@@ -21,5 +21,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         public const string Sticker = "sticker";
 
         public const string Flex = "flex";
+
+        public const string Carousel = "carousel";
     }
 }
