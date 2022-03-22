@@ -96,7 +96,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 // Accept Type Header
                 // httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
                 httpClient.DefaultRequestHeaders
-                    .Add("Authorization", $"Bearer {this.lineBotSetting.Value.AccesstoKen}");
+                    .Add("Authorization", $"Bearer {this.lineBotSetting.Value.AccessToKen}");
 
                 var resp = await httpClient.SendAsync(httpReqMsg);
             }

@@ -11,7 +11,7 @@ namespace LineBot_LieFlatMonkey.Assets.Model.AppSetting
         /// <summary>
         /// Channel access token
         /// </summary>
-        public string AccesstoKen { get; set; }
+        public string AccessToKen { get; set; }
 
         /// <summary>
         /// A unique secret key

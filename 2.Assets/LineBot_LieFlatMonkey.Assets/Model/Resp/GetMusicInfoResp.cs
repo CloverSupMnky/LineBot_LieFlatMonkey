@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LineBot_LieFlatMonkey.Assets.Model.Resp
 {
+    /// <summary>
+    /// KKBox 音樂排行榜資訊
+    /// </summary>
     public class GetMusicInfoResp
     {
         public string code { get; set; }

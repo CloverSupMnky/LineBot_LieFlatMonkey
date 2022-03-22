@@ -1,7 +1,13 @@
-﻿using LineBot_LieFlatMonkey.Assets.Constant;
+﻿using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
+using Google.Apis.YouTube.v3.Data;
+using LineBot_LieFlatMonkey.Assets.Constant;
 using LineBot_LieFlatMonkey.Assets.Model;
+using LineBot_LieFlatMonkey.Assets.Model.AppSetting;
 using LineBot_LieFlatMonkey.Assets.Model.Resp;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +23,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     {
         private readonly IHttpClientService httpClientService;
         private readonly ICommonService commonService;
+        private readonly IOptions<GoogleDriverSetting> googleDriverSetting;
 
         /// <summary>
         /// 曲風判斷字典
@@ -32,10 +39,12 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
         public MusicRecommandService(
             IHttpClientService httpClientService, 
-            ICommonService commonService)
+            ICommonService commonService,
+            IOptions<GoogleDriverSetting> googleDriverSetting)
         {
             this.httpClientService = httpClientService;
             this.commonService = commonService;
+            this.googleDriverSetting = googleDriverSetting;
 
             musicCateTypeDic = new Dictionary<int, string>()
             {
@@ -68,23 +77,62 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             List<Song> songList = 
                 await this.httpClientService.GetSongInfoByMusicCateType(musicCate);
 
-            Song song = new Song();
-            //MusicRecommandVideoInfo videoInfo = new MusicRecommandVideoInfo();
+            Song song = null;
+            SearchResult video = null;
             if (songList.Count > 0)
             {
                 song = songList[this.commonService.GetRandomNo(songList.Count) - 1];
-                // videoInfo = this.webDriverService.GetVideoInfoByMusicInfo(musicInfo);
+                video = await this.GetYTInfo(song);
             }
 
             var res = new MusicRecommandResp();
 
-            res.Artist = song.artist_name;
-            res.Song = song.song_name;
-            //res.VideoUrl = videoInfo.VideoUrl;
-            //res.ImageUrl = videoInfo.ImageUrl;
+            if (song != null) 
+            {
+                res.Artist = song.artist_name;
+                res.Song = song.song_name;
+            }
+
+            if (video != null && 
+                video.Id != null && 
+                video.Snippet != null && 
+                video.Snippet.Thumbnails != null &&
+                video.Snippet.Thumbnails.Medium != null)
+            {
+                res.VideoUrl = $"https://www.youtube.com/watch?v={video.Id.VideoId}";
+                res.ImageUrl = video.Snippet.Thumbnails.Medium.Url;
+            }
+
             res.SongType = this.musicCateStrTypeDic[no];
 
             return res;
+        }
+
+        /// <summary>
+        /// 依音樂資訊取得 YT 影片資訊
+        /// </summary>
+        /// <param name="song"></param>
+        /// <returns></returns>
+        private async Task<SearchResult> GetYTInfo(Song song) 
+        {
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            {
+                ApiKey = this.googleDriverSetting.Value.YTAccessToKen,
+                ApplicationName = this.GetType().ToString()
+            });
+
+            var searchListRequest = youtubeService.Search.List("snippet");
+
+            // 設定查詢值
+            searchListRequest.Q = $"{song.artist_name}-{song.song_name}";
+
+            // 取得 1 筆結果
+            searchListRequest.MaxResults = 1;
+
+            SearchListResponse searchListResponse = 
+                await searchListRequest.ExecuteAsync();
+
+            return searchListResponse.Items.FirstOrDefault();
         }
     }
 }
