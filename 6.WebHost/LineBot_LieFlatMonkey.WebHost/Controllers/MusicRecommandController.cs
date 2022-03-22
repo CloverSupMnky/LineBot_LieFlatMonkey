@@ -17,9 +17,9 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult GetRecommand() 
+        public async Task<IActionResult> GetRecommand() 
         {
-            var res = this.musicRecommandService.Recommand();
+            var res = await this.musicRecommandService.Recommand();
 
             return Success(res);
         }

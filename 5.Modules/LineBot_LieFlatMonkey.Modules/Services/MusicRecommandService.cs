@@ -15,7 +15,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     /// </summary>
     public class MusicRecommandService : IMusicRecommandService
     {
-        private readonly IWebDriverService webDriverService;
+        private readonly IHttpClientService httpClientService;
         private readonly ICommonService commonService;
 
         /// <summary>
@@ -31,10 +31,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
 
         public MusicRecommandService(
-            IWebDriverService webDriverService, 
+            IHttpClientService httpClientService, 
             ICommonService commonService)
         {
-            this.webDriverService = webDriverService;
+            this.httpClientService = httpClientService;
             this.commonService = commonService;
 
             musicCateTypeDic = new Dictionary<int, string>()
@@ -59,29 +59,29 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// <summary>
         /// 推薦音樂
         /// </summary>
-        public MusicRecommandResp Recommand()
+        public async Task<MusicRecommandResp> Recommand()
         {
             var no = this.commonService.GetRandomNo(this.musicCateTypeDic.Count);
 
             var musicCate = this.musicCateTypeDic[no];
 
-            List<MusicRecommandMusicInfo> muscList = 
-                this.webDriverService.GetMusicListByMusicCateType(musicCate);
+            List<Song> songList = 
+                await this.httpClientService.GetSongInfoByMusicCateType(musicCate);
 
-            MusicRecommandMusicInfo musicInfo = new MusicRecommandMusicInfo();
-            MusicRecommandVideoInfo videoInfo = new MusicRecommandVideoInfo();
-            if (muscList.Count > 0)
+            Song song = new Song();
+            //MusicRecommandVideoInfo videoInfo = new MusicRecommandVideoInfo();
+            if (songList.Count > 0)
             {
-                musicInfo = muscList[this.commonService.GetRandomNo(muscList.Count) - 1];
-                videoInfo = this.webDriverService.GetVideoInfoByMusicInfo(musicInfo);
+                song = songList[this.commonService.GetRandomNo(songList.Count) - 1];
+                // videoInfo = this.webDriverService.GetVideoInfoByMusicInfo(musicInfo);
             }
 
             var res = new MusicRecommandResp();
 
-            res.Artist = musicInfo.Artist;
-            res.Song = musicInfo.Song;
-            res.VideoUrl = videoInfo.VideoUrl;
-            res.ImageUrl = videoInfo.ImageUrl;
+            res.Artist = song.artist_name;
+            res.Song = song.song_name;
+            //res.VideoUrl = videoInfo.VideoUrl;
+            //res.ImageUrl = videoInfo.ImageUrl;
             res.SongType = this.musicCateStrTypeDic[no];
 
             return res;

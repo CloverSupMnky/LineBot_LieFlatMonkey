@@ -1,6 +1,7 @@
 ﻿using LineBot_LieFlatMonkey.Assets.Constant;
 using LineBot_LieFlatMonkey.Assets.Model.AppSetting;
 using LineBot_LieFlatMonkey.Assets.Model.LineBot;
+using LineBot_LieFlatMonkey.Assets.Model.Resp;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -19,19 +20,11 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     /// </summary>
     public class HttpClientService : IHttpClientService
     {
-        private readonly HttpClient httpClient;
         private readonly IOptions<LineBotSetting> lineBotSetting;
 
         public HttpClientService(IOptions<LineBotSetting> lineBotSetting)
         {
-            httpClient = new HttpClient();
-
             this.lineBotSetting = lineBotSetting;
-
-            // Accept Type Header
-            // httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
-            httpClient.DefaultRequestHeaders
-                .Add("Authorization", $"Bearer {this.lineBotSetting.Value.AccesstoKen}");
         }
 
         /// <summary>
@@ -98,7 +91,58 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             // Content Type
             httpReqMsg.Content = new StringContent(reqJson, Encoding.UTF8, "application/json");
 
-            var resp = await this.httpClient.SendAsync(httpReqMsg);
+            using (var httpClient = new HttpClient()) 
+            {
+                // Accept Type Header
+                // httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
+                httpClient.DefaultRequestHeaders
+                    .Add("Authorization", $"Bearer {this.lineBotSetting.Value.AccesstoKen}");
+
+                var resp = await httpClient.SendAsync(httpReqMsg);
+            }
+        }
+
+        /// <summary>
+        /// 依曲風類型取得音樂推薦列表
+        /// </summary>
+        /// <param name="musicCate">曲風類型</param>
+        /// <returns></returns>
+        public async Task<List<Song>> GetSongInfoByMusicCateType(string musicCate)
+        {
+            var now = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+
+            var res = new List<Song>();
+
+            try 
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    // 增加 User-Agent 標頭
+                    httpClient.DefaultRequestHeaders
+                        .Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36");
+
+                    httpClient.DefaultRequestHeaders
+                        .Add("Referer", $"https://kma.kkbox.com/charts/daily/song?cate={musicCate}&lang=tc&terr=tw");
+
+                    string url = $"https://kma.kkbox.com/charts/api/v1/daily?category={musicCate}&date={now}&lang=tc&limit=50&terr=tw&type=song";
+
+                    var responseResult = await httpClient.GetStringAsync(url);
+
+                    if (!string.IsNullOrEmpty(responseResult)) 
+                    {
+                        var getMusicInfoResp = 
+                            JsonConvert.DeserializeObject<GetMusicInfoResp>(responseResult);
+
+                        res = getMusicInfoResp.data.charts.song;
+                    }
+                }
+
+                return res;
+            }
+            catch 
+            {
+                return res;
+            }
         }
     }
 }
