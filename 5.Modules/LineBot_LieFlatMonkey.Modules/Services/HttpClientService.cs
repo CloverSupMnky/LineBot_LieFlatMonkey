@@ -128,7 +128,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                     httpClient.DefaultRequestHeaders
                         .Add("Referer", $"https://kma.kkbox.com/charts/daily/song?cate={musicCate}&lang=tc&terr=tw");
 
-                    string url = $"https://kma.kkbox.com/charts/api/v1/daily?category={musicCate}&date={now}&lang=tc&limit=50&terr=tw&type=song";
+                    string url = $"https://kma.kkbox.com/charts/api/v1/daily?category={musicCate}&date={now}&lang=tc&limit=10&terr=tw&type=song";
 
                     var responseResult = await httpClient.GetStringAsync(url);
 
@@ -166,8 +166,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 using (var httpClient = new HttpClient())
                 {
 
-                    string url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={searchWord}&location={latitude},{longitude}&radius={radius}&type=food&key={this.googleDriverSetting.Value.GoogleMap}&opennow=opennow";
-
+                    string url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={searchWord}&location={latitude},{longitude}&radius={radius}&type=food&key={this.googleDriverSetting.Value.GoogleMap}&opennow=opennow&language=zh-TW";
+                    
                     var responseResult = await httpClient.GetStringAsync(url);
 
                     if (!string.IsNullOrEmpty(responseResult))

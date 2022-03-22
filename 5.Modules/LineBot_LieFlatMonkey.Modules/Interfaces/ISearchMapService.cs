@@ -18,6 +18,6 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="searchWord">查詢文字</param>
         /// <param name="latitude">緯度</param>
         /// <param name="longitude">經度</param>
-        Task<SearchMapResp> SearchMap(string searchWord, string latitude, string longitude);
+        Task<IEnumerable<MapInfoResp>> SearchMap(string searchWord, string latitude, string longitude);
     }
 }
