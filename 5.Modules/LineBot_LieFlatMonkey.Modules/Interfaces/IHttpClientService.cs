@@ -34,5 +34,16 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="musicCate">曲風類型</param>
         /// <returns></returns>
         Task<List<Song>> GetSongInfoByMusicCateType(string musicCate);
+
+        /// <summary>
+        /// 查詢地圖取得商家資料
+        /// </summary>
+        /// <param name="searchWord">查詢文字</param>
+        /// <param name="latitude">緯度</param>
+        /// <param name="longitude">經度</param>
+        /// <param name="radius">查詢距離</param>
+        /// <returns></returns>
+        Task<SearchMapResp> SearchMapAsync(
+            string searchWord, string latitude, string longitude, int radius = 600);
     }
 }

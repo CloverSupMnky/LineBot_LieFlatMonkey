@@ -21,10 +21,14 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     public class HttpClientService : IHttpClientService
     {
         private readonly IOptions<LineBotSetting> lineBotSetting;
+        private readonly IOptions<GoogleDriverSetting> googleDriverSetting;
 
-        public HttpClientService(IOptions<LineBotSetting> lineBotSetting)
+        public HttpClientService(
+            IOptions<LineBotSetting> lineBotSetting,
+            IOptions<GoogleDriverSetting> googleDriverSetting)
         {
             this.lineBotSetting = lineBotSetting;
+            this.googleDriverSetting = googleDriverSetting;
         }
 
         /// <summary>
@@ -140,6 +144,41 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 return res;
             }
             catch 
+            {
+                return res;
+            }
+        }
+
+        /// <summary>
+        /// 查詢地圖取得商家資料
+        /// </summary>
+        /// <param name="searchWord">查詢文字</param>
+        /// <param name="latitude">緯度</param>
+        /// <param name="longitude">經度</param>
+        /// <param name="radius">查詢距離</param>
+        /// <returns></returns>
+        public async Task<SearchMapResp> SearchMapAsync(
+            string searchWord, string latitude, string longitude,int radius = 600)
+        {
+            var res = new SearchMapResp();
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+
+                    string url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={searchWord}&location={latitude},{longitude}&radius={radius}&type=food&key={this.googleDriverSetting.Value.GoogleMap}&opennow=opennow";
+
+                    var responseResult = await httpClient.GetStringAsync(url);
+
+                    if (!string.IsNullOrEmpty(responseResult))
+                    {
+                        res = JsonConvert.DeserializeObject<SearchMapResp>(responseResult);
+                    }
+                }
+
+                return res;
+            }
+            catch
             {
                 return res;
             }

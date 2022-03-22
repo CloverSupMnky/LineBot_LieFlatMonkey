@@ -99,14 +99,14 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 Type = ActionType.Postback, 
                 Label = "飲料", 
                 Text = "飲料", 
-                Data = $"type=map&word=飲料&latitude={latitude}&longitude={longitude}"
+                Data = $"{QueryStringType.Type}=map&{QueryStringType.Word}=飲料&{QueryStringType.Latitude}={latitude}&{QueryStringType.Longitude}={longitude}"
             }});
 
             res.Add(new QuickReplyItem{ Action = new QuickReplyAction() { 
                 Type = ActionType.Postback, 
                 Label = "食物", 
                 Text = "食物", 
-                Data = $"type=map&word=食物&latitude={latitude}&longitude={longitude}" 
+                Data = $"{QueryStringType.Type}=map&{QueryStringType.Word}=食物&{QueryStringType.Latitude}={latitude}&{QueryStringType.Longitude}={longitude}" 
             }});
 
             return res;
