@@ -26,5 +26,11 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         /// chat. You can reply to join events.
         /// </summary>
         public const string Join = "join";
+
+        /// <summary>
+        /// Event object for when a user performs a postback action which initiates a postback. 
+        /// You can reply to postback events.
+        /// </summary>
+        public const string Postback = "postback";
     }
 }

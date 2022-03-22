@@ -16,8 +16,8 @@ namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
         [JsonProperty("message")]
         public Message Message { get; set; }
 
-        [JsonProperty("Timestamp")]
-        public long timestamp { get; set; }
+        [JsonProperty("timestamp")]
+        public long Timestamp { get; set; }
 
         [JsonProperty("source")]
         public Source Source { get; set; }
@@ -27,5 +27,8 @@ namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
 
         [JsonProperty("mode")]
         public string Mode { get; set; }
+
+        [JsonProperty("postback")]
+        public Postback Postback { get; set; }
     }
 }

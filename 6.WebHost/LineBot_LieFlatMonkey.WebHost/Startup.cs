@@ -80,6 +80,7 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.AddScoped<MessageEventService>();
             services.AddScoped<FollowEventService>();
             services.AddScoped<JoinEventService>();
+            services.AddScoped<PostbackEventService>();
             services.AddScoped<Func<string, IEventFactoryService>>(serviceProvider => type =>
             {
                 switch (type)
@@ -90,6 +91,8 @@ namespace LineBot_LieFlatMonkey.WebHost
                         return serviceProvider.GetService<FollowEventService>();
                     case EventType.Join:
                         return serviceProvider.GetService<JoinEventService>();
+                    case EventType.Postback:
+                        return serviceProvider.GetService<PostbackEventService>();
                     default:
                         throw new Exception("Not valid key"); ;
                 }

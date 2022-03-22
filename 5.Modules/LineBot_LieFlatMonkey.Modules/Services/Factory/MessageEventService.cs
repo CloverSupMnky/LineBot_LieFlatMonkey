@@ -83,6 +83,9 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 case TextMessageType.MusicRecommand:
                     messages = await this.GetMusicRecommand(replyToken);
                     break;
+                case TextMessageType.SearchMap:
+                    messages = this.GetSearchMapQuickReply();
+                    break;
             }
 
             if(messages == null) 
@@ -286,6 +289,31 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             {
                 new FlexResultMessage(){ Contents = obj ,AltText = "音樂推薦"},
                 new StickerResultMessage(){ StickerId = "11087930", PackageId = "6362"}
+            };
+        }
+
+        /// <summary>
+        /// 取得地圖探索功能的 QuickReply
+        /// </summary>
+        /// <param name="replyToken">回覆訊息的 replyToken</param>
+        /// <returns></returns>
+        private List<ResultMessage> GetSearchMapQuickReply()
+        {
+            var quickReply = new QuickReply();
+
+            quickReply.Items = new List<QuickReplyItem>();
+
+            quickReply.Items.Add(
+                new QuickReplyItem 
+                { Action = new QuickReplyAction() { Type = ActionType.Postback, Label = "飲料",Text = "飲料",Data = "type=map&word=飲料" } });
+
+            quickReply.Items.Add(
+                new QuickReplyItem
+                { Action = new QuickReplyAction() { Type = ActionType.Postback, Label = "食物", Text = "食物", Data = "type=map&word=食物" } });
+
+            return new List<ResultMessage>()
+            {
+                new TextResultMessage(){ Text = "請選擇要探索的項目" , QuickReply = quickReply}
             };
         }
     }

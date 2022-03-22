@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
 {
-    public class QuickreplyItem
+    public class QuickReplyItem
     {
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } = ActionType.Base;
+
+        [JsonProperty("imageUrl")]
+        public string ImageUrl { get; set; }
 
         [JsonProperty("action")]
-        public QuickreplyAction Action { get; set; }
+        public QuickReplyAction Action { get; set; }
     }
 }

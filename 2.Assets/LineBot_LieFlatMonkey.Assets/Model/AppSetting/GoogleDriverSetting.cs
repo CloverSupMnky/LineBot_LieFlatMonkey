@@ -15,5 +15,10 @@ namespace LineBot_LieFlatMonkey.Assets.Model.AppSetting
         /// YT 存取金鑰
         /// </summary>
         public string YTAccessToKen { get; set; }
+
+        /// <summary>
+        /// GoogleMap 存取金鑰
+        /// </summary>
+        public string GoogleMap { get; set; }
     }
 }

@@ -17,12 +17,14 @@ namespace LineBot_LieFlatMonkey.Modules.Factory
         private readonly IEventFactoryService messageEventService;
         private readonly IEventFactoryService followEventService;
         private readonly IEventFactoryService joinEventService;
+        private readonly IEventFactoryService postbackEventService;
 
         public EventFactory(Func<string, IEventFactoryService> serviceProvider)
         {
             messageEventService = serviceProvider(EventType.Message);
             followEventService = serviceProvider(EventType.Follow);
             joinEventService = serviceProvider(EventType.Join);
+            postbackEventService = serviceProvider(EventType.Postback);
         }
 
         /// <summary>
@@ -39,6 +41,8 @@ namespace LineBot_LieFlatMonkey.Modules.Factory
                     return this.followEventService;
                 case EventType.Join: 
                     return this.joinEventService;
+                case EventType.Postback:
+                    return this.postbackEventService;
                 default:
                     throw new Exception("EventFactory 未處理的 Line Bot 事件類型");
             }

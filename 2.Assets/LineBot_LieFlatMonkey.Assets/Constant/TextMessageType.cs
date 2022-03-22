@@ -18,5 +18,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         public const string EnglishStence = "雞湯一碗";
 
         public const string MusicRecommand = "音樂推薦";
+
+        public const string SearchMap = "地圖探索";
     }
 }
