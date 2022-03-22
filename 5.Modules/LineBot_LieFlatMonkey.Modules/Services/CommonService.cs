@@ -1,6 +1,8 @@
-﻿using LineBot_LieFlatMonkey.Modules.Interfaces;
+﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Modules.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,25 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             Random random = new Random(Guid.NewGuid().GetHashCode());
 
             return random.Next(1, maxLength + 1);
+        }
+
+        /// <summary>
+        /// 依模板檔案名稱取得對應模板 Json 字串
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetMessageTemplateByName(string name)
+        {
+            var filePath = Path.Combine(Environment.CurrentDirectory, DirName.Template, name);
+
+            if (!File.Exists(filePath)) return string.Empty;
+
+            string res = string.Empty;
+            using (var streamReader = new StreamReader(filePath, Encoding.UTF8))
+            {
+                res = await streamReader.ReadToEndAsync();
+            }
+
+            return res;
         }
     }
 }

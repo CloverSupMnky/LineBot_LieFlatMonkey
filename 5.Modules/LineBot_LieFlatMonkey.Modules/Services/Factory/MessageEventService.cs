@@ -26,19 +26,25 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         private readonly IEnglishSentenceService englishSentenceService;
         private readonly ISpeechService speechService;
         private readonly IOptions<ApiDomainSetting> apiDomainSetting;
+        private readonly IMusicRecommandService musicRecommandService;
+        private readonly ICommonService commonService;
 
         public MessageEventService(
             IHttpClientService httpClientService,
             ITarotCardService tarotCardService,
             IEnglishSentenceService englishSentenceService,
             ISpeechService speechService,
-            IOptions<ApiDomainSetting> apiDomainSetting)
+            IOptions<ApiDomainSetting> apiDomainSetting,
+            IMusicRecommandService musicRecommandService,
+            ICommonService commonService)
         {
             this.httpClientService = httpClientService;
             this.tarotCardService = tarotCardService;
             this.englishSentenceService = englishSentenceService;
             this.speechService = speechService;
             this.apiDomainSetting = apiDomainSetting;
+            this.musicRecommandService = musicRecommandService;
+            this.commonService = commonService;
         }
 
         /// <summary>
@@ -74,6 +80,9 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 case TextMessageType.EnglishStence:
                     messages = await this.GetEnglishSentence(replyToken);
                     break;
+                case TextMessageType.MusicRecommand:
+                    messages = await this.GetMusicRecommand(replyToken);
+                    break;
             }
 
             if(messages == null) 
@@ -92,19 +101,13 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         /// <returns></returns>
         private async Task<List<ResultMessage>> TarotCardMessage(string fortuneTellingType) 
         {
-            var filePath = Path.Combine(
-                Environment.CurrentDirectory, DirName.Template, "TarotCardTemplate.json");
-
-            if (!File.Exists(filePath)) return null;
-
             var tarotCard =
                 this.tarotCardService.FortuneTellingByType(fortuneTellingType);
 
-            string jsonString = string.Empty;
-            using (var streamReader = new StreamReader(filePath,Encoding.UTF8))
-            {
-                jsonString = await streamReader.ReadToEndAsync();
-            }
+            string jsonString =
+                await this.commonService.GetMessageTemplateByName("TarotCardTemplate.json");
+
+            if (string.IsNullOrEmpty(jsonString)) return null;
 
             jsonString = jsonString.Replace("{#ImageUrl}", tarotCard.ImageUrl);
             jsonString = jsonString.Replace("{#Name}", tarotCard.Name);
@@ -118,7 +121,6 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             return new List<ResultMessage>()
             {
-                new TextResultMessage(){ Text = "運勢占卜結果"},
                 new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"},
                 new StickerResultMessage(){ StickerId = "16581294", PackageId = "8525"}
             };
@@ -127,7 +129,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         /// <summary>
         /// 取得英文句子
         /// </summary>
-        /// <param name="replyToken">回覆訊息的 replyToken </param>
+        /// <param name="replyToken">回覆訊息的 replyToken</param>
         /// <returns></returns>
         private async Task<List<ResultMessage>> GetEnglishSentence(string replyToken)
         {
@@ -144,7 +146,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             return new List<ResultMessage>()
             {
                 flexMessage,
-                audioMessage
+                audioMessage,
+                new StickerResultMessage(){ StickerId = "51626496", PackageId = "11538"}
             };
         }
 
@@ -152,7 +155,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         /// 取得英文語句音頻訊息
         /// </summary>
         /// <param name="sentenceText">英文語句</param>
-        /// <param name="replyToken">回覆訊息的 replyToken </param>
+        /// <param name="replyToken">回覆訊息的 replyToken</param>
         /// <returns></returns>
         private async Task<AudioResultMessage> GetEnglishSentenceAudioMessage(
             string sentenceText, string replyToken)
@@ -174,7 +177,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         /// <summary>
         /// 取得成功音頻訊息
         /// </summary>
-        /// <param name="replyToken">回覆訊息的 replyToken </param>
+        /// <param name="replyToken">回覆訊息的 replyToken</param>
         /// <returns></returns>
         private AudioResultMessage GetSuccessAudioMessage(string replyToken)
         {
@@ -242,16 +245,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         private async Task<FlexResultMessage> GetEnglishSentenceFlexMessage(
             EnglishSentenceResp sentenceResp)
         {
-            var filePath = Path.Combine(
-                Environment.CurrentDirectory, DirName.Template, "EnglishSentenceTemplate.json");
+            string jsonString = 
+                await this.commonService.GetMessageTemplateByName("EnglishSentenceTemplate.json");
 
-            if (!File.Exists(filePath)) return null;
-
-            string jsonString = string.Empty;
-            using (var streamReader = new StreamReader(filePath, Encoding.UTF8))
-            {
-                jsonString = await streamReader.ReadToEndAsync();
-            }
+            if (string.IsNullOrEmpty(jsonString)) return null;
 
             jsonString = jsonString.Replace("{#Sentence}", sentenceResp.Sentence);
             jsonString = jsonString.Replace("{#Translation}", sentenceResp.Translation);
@@ -261,6 +258,35 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             var obj = JsonConvert.DeserializeObject<object>(jsonString);
 
             return new FlexResultMessage() { Contents = obj, AltText = "雞湯來啦~" };
+        }
+
+        /// <summary>
+        /// 取得音樂推薦模板訊息
+        /// </summary>
+        /// <param name="replyToken">回覆訊息的 replyToken</param>
+        /// <returns></returns>
+        private async Task<List<ResultMessage>> GetMusicRecommand(string replyToken)
+        {
+            var musicRecommand = await this.musicRecommandService.Recommand();
+
+            string jsonString =
+                await this.commonService.GetMessageTemplateByName("MusicRecommandTemplate.json");
+
+            if (string.IsNullOrEmpty(jsonString)) return null;
+
+            jsonString = jsonString.Replace("{#ImageUrl}", musicRecommand.ImageUrl);
+            jsonString = jsonString.Replace("{#Artist}", musicRecommand.Artist);
+            jsonString = jsonString.Replace("{#SongType}", musicRecommand.SongType);
+            jsonString = jsonString.Replace("{#Song}", musicRecommand.Song);
+            jsonString = jsonString.Replace("{#VideoUrl}", musicRecommand.VideoUrl);
+
+            var obj = JsonConvert.DeserializeObject<object>(jsonString);
+
+            return new List<ResultMessage>()
+            {
+                new FlexResultMessage(){ Contents = obj ,AltText = "音樂推薦"},
+                new StickerResultMessage(){ StickerId = "11087930", PackageId = "6362"}
+            };
         }
     }
 }

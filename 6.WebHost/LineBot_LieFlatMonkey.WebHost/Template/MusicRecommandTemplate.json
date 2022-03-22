@@ -1,0 +1,92 @@
+{
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "url": "{#ImageUrl}",
+    "size": "full",
+    "aspectRatio": "320:180",
+    "aspectMode": "cover",
+    "gravity": "center"
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "contents": [
+          {
+            "type": "span",
+            "text": "曲風 : ",
+            "size": "lg",
+            "weight": "bold",
+            "color": "#ffffff"
+          },
+          {
+            "type": "span",
+            "text": "{#SongType}",
+            "size": "lg",
+            "weight": "bold",
+            "color": "#ffffff"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "wrap": true,
+        "margin": "md",
+        "contents": [
+          {
+            "type": "span",
+            "text": "歌手 : ",
+            "size": "lg",
+            "color": "#ffffff"
+          },
+          {
+            "type": "span",
+            "text": "{#Artist}",
+            "size": "lg",
+            "weight": "bold",
+            "color": "#ffffff"
+          }
+        ],
+        "weight": "bold"
+      },
+      {
+        "type": "text",
+        "contents": [
+          {
+            "type": "span",
+            "text": "曲目 : ",
+            "size": "lg",
+            "weight": "bold",
+            "color": "#ffffff"
+          },
+          {
+            "type": "span",
+            "text": "{#Song}",
+            "size": "lg",
+            "weight": "bold",
+            "color": "#ffffff"
+          }
+        ],
+        "margin": "md",
+        "wrap": true
+      }
+    ],
+    "backgroundColor": "#464F69"
+  },
+  "action": {
+    "type": "uri",
+    "label": "action",
+    "uri": "{#VideoUrl}"
+  },
+  "styles": {
+    "hero": {
+      "backgroundColor": "#464F69"
+    },
+    "body": {
+      "backgroundColor": "#464F69"
+    }
+  }
+}

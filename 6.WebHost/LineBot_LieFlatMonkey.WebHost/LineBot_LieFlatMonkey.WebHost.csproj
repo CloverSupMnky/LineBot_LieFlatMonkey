@@ -18,6 +18,9 @@
     <Content Update="Template\EnglishSentenceTemplate.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="Template\MusicRecommandTemplate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Template\TarotCardTemplate.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
