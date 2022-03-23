@@ -166,7 +166,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 using (var httpClient = new HttpClient())
                 {
 
-                    string url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={searchWord}&location={latitude},{longitude}&radius={radius}&type=food&key={this.googleDriverSetting.Value.GoogleMap}&opennow=opennow&language=zh-TW";
+                    string url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword={searchWord}&location={latitude},{longitude}&radius={radius}&key={this.googleDriverSetting.Value.GoogleMap}&opennow=opennow&language=zh-TW";
                     
                     var responseResult = await httpClient.GetStringAsync(url);
 
