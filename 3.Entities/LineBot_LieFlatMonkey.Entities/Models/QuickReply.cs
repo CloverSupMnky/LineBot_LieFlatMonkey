@@ -22,5 +22,9 @@ namespace LineBot_LieFlatMonkey.Entities.Models
         /// 排序
         /// </summary>
         public int Sort { get; set; }
+        /// <summary>
+        /// 項目描述
+        /// </summary>
+        public string Description { get; set; }
     }
 }

@@ -74,9 +74,11 @@ namespace LineBot_LieFlatMonkey.Entities.Contexts
                     .HasMaxLength(20)
                     .HasComment("項目值");
 
-                entity.Property(e => e.ImageUrl)
-                    .IsRequired()
-                    .HasMaxLength(500);
+                entity.Property(e => e.Description)
+                    .HasMaxLength(10)
+                    .HasComment("項目描述");
+
+                entity.Property(e => e.ImageUrl).HasMaxLength(500);
 
                 entity.Property(e => e.Sort).HasComment("排序");
             });
