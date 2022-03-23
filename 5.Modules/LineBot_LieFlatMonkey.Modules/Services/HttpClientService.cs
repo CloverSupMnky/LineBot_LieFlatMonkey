@@ -183,5 +183,15 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 return res;
             }
         }
+
+        /// <summary>
+        /// 依 Ptt 看板類別查詢文章
+        /// </summary>
+        /// <param name="type">看板類別</param>
+        /// <returns></returns>
+        public async Task SearchPttByBoardType(string type)
+        {
+           
+        }
     }
 }

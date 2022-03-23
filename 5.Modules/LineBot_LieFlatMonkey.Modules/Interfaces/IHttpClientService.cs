@@ -44,6 +44,13 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="radius">查詢距離</param>
         /// <returns></returns>
         Task<SearchMapResp> SearchMapAsync(
-            string searchWord, string latitude, string longitude, int radius = 600);
+            string searchWord, string latitude, string longitude, int radius = 1000);
+
+        /// <summary>
+        /// 依 Ptt 看板類別查詢文章
+        /// </summary>
+        /// <param name="type">看板類別</param>
+        /// <returns></returns>
+        Task SearchPttByBoardType(string type);
     }
 }
