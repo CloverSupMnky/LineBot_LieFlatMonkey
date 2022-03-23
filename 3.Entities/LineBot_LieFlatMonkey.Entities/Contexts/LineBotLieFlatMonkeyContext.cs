@@ -77,6 +77,8 @@ namespace LineBot_LieFlatMonkey.Entities.Contexts
                 entity.Property(e => e.ImageUrl)
                     .IsRequired()
                     .HasMaxLength(500);
+
+                entity.Property(e => e.Sort).HasComment("排序");
             });
 
             modelBuilder.Entity<TarotCard>(entity =>

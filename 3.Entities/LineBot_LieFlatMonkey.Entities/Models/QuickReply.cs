@@ -18,5 +18,9 @@ namespace LineBot_LieFlatMonkey.Entities.Models
         /// </summary>
         public string ItemValue { get; set; }
         public string ImageUrl { get; set; }
+        /// <summary>
+        /// 排序
+        /// </summary>
+        public int Sort { get; set; }
     }
 }
