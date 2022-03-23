@@ -25,19 +25,22 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         private readonly ISearchPttService searchPttService;
         private readonly ICommonService commonService;
         private readonly ITarotCardService tarotCardService;
+        private readonly IMusicRecommandService musicRecommandService;
 
         public PostbackEventService(
             IHttpClientService httpClientService, 
             ISearchMapService searchMapService,
             ISearchPttService searchPttService,
             ICommonService commonService,
-            ITarotCardService tarotCardService)
+            ITarotCardService tarotCardService,
+            IMusicRecommandService musicRecommandService)
         {
             this.httpClientService = httpClientService;
             this.searchMapService = searchMapService;
             this.commonService = commonService;
             this.searchPttService = searchPttService;
             this.tarotCardService = tarotCardService;
+            this.musicRecommandService = musicRecommandService;
         }
 
         public async Task Invoke(Event eventInfo)
@@ -73,9 +76,42 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     return await this.GetSearchPttMessages(query);
                 case QuickReplyType.TarotCard:
                     return await this.GetTarotCardMessages();
+                case QuickReplyType.MusicRecommand:
+                    return await this.GetMusicRecommandMessages(query);
                 default:
                     return null;
             }
+        }
+
+        /// <summary>
+        /// 取得音樂推薦模板訊息
+        /// </summary>
+        /// <param name="query">查詢物件</param>
+        /// <returns></returns>
+        private async Task<List<ResultMessage>> GetMusicRecommandMessages(NameValueCollection query)
+        {
+            var musicCateType = query[QueryStringPropertyType.Word];
+
+            var musicRecommand = await this.musicRecommandService.RecommandByMusicCateType(musicCateType);
+
+            string jsonString =
+                await this.commonService.GetMessageTemplateByName("MusicRecommandTemplate.json");
+
+            if (string.IsNullOrEmpty(jsonString)) return null;
+
+            jsonString = jsonString.Replace("{#ImageUrl}", musicRecommand.ImageUrl);
+            jsonString = jsonString.Replace("{#Artist}", musicRecommand.Artist);
+            jsonString = jsonString.Replace("{#SongType}", musicRecommand.SongType);
+            jsonString = jsonString.Replace("{#Song}", musicRecommand.Song);
+            jsonString = jsonString.Replace("{#VideoUrl}", musicRecommand.VideoUrl);
+
+            var obj = JsonConvert.DeserializeObject<object>(jsonString);
+
+            return new List<ResultMessage>()
+            {
+                new FlexResultMessage(){ Contents = obj ,AltText = "音樂推薦"},
+                new StickerResultMessage(){ StickerId = "11087930", PackageId = "6362"}
+            };
         }
 
         /// <summary>

@@ -27,15 +27,13 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
         /// <summary>
         /// 曲風判斷字典
-        /// 1-華語
-        /// 2-西洋
-        /// 3-日語
-        /// 4-韓語
-        /// 5-台語
+        /// 297-華語
+        /// 390-西洋
+        /// 308-日語
+        /// 314-韓語
+        /// 304-台語
         /// </summary>
-        private readonly Dictionary<int, string> musicCateTypeDic;
-        private readonly Dictionary<int, string> musicCateStrTypeDic;
-
+        private readonly Dictionary<string, string> musicCateStrTypeDic;
 
         public MusicRecommandService(
             IHttpClientService httpClientService, 
@@ -46,36 +44,25 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             this.commonService = commonService;
             this.googleDriverSetting = googleDriverSetting;
 
-            musicCateTypeDic = new Dictionary<int, string>()
+            musicCateStrTypeDic = new Dictionary<string, string>()
             {
-                {1,MusicCateType.Chinese},
-                {2,MusicCateType.Western},
-                {3,MusicCateType.Japan},
-                {4,MusicCateType.Korea},
-                {5,MusicCateType.Taiwanese}
-            };
-
-            musicCateStrTypeDic = new Dictionary<int, string>()
-            {
-                {1,MusicCateStrType.Chinese},
-                {2,MusicCateStrType.Western},
-                {3,MusicCateStrType.Japan},
-                {4,MusicCateStrType.Korea},
-                {5,MusicCateStrType.Taiwanese}
+                {MusicCateType.Chinese,MusicCateStrType.Chinese},
+                {MusicCateType.Western,MusicCateStrType.Western},
+                {MusicCateType.Japan,MusicCateStrType.Japan},
+                {MusicCateType.Korea,MusicCateStrType.Korea},
+                {MusicCateType.Taiwanese,MusicCateStrType.Taiwanese}
             };
         }
 
         /// <summary>
-        /// 推薦音樂
+        /// 依曲風推薦音樂
         /// </summary>
-        public async Task<MusicRecommandResp> Recommand()
+        /// <param name="musicCateType">曲風</param>
+        /// <returns></returns>
+        public async Task<MusicRecommandResp> RecommandByMusicCateType(string musicCateType)
         {
-            var no = this.commonService.GetRandomNo(this.musicCateTypeDic.Count);
-
-            var musicCate = this.musicCateTypeDic[no];
-
             List<Song> songList = 
-                await this.httpClientService.GetSongInfoByMusicCateType(musicCate);
+                await this.httpClientService.GetSongInfoByMusicCateType(musicCateType);
 
             Song song = null;
             SearchResult video = null;
@@ -103,7 +90,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 res.ImageUrl = video.Snippet.Thumbnails.Medium.Url;
             }
 
-            res.SongType = this.musicCateStrTypeDic[no];
+            res.SongType = this.musicCateStrTypeDic[musicCateType];
 
             return res;
         }

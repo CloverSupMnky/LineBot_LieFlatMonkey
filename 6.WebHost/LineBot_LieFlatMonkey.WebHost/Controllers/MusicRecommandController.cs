@@ -1,4 +1,5 @@
-﻿using LineBot_LieFlatMonkey.Modules.Interfaces;
+﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Modules.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> GetRecommand() 
         {
-            var res = await this.musicRecommandService.Recommand();
+            var res = await this.musicRecommandService.RecommandByMusicCateType(MusicCateType.Chinese);
 
             return Success(res);
         }

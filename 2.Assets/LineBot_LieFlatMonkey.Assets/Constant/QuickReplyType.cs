@@ -16,5 +16,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         public const string SearchPTT = "SearchPTT";
 
         public const string TarotCard = "TarotCard";
+
+        public const string MusicRecommand = "MusicRecommand";
     }
 }

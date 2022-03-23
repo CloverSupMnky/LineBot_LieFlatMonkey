@@ -26,7 +26,6 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         private readonly IEnglishSentenceService englishSentenceService;
         private readonly ISpeechService speechService;
         private readonly IOptions<ApiDomainSetting> apiDomainSetting;
-        private readonly IMusicRecommandService musicRecommandService;
         private readonly ICommonService commonService;
 
         public MessageEventService(
@@ -35,7 +34,6 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             IEnglishSentenceService englishSentenceService,
             ISpeechService speechService,
             IOptions<ApiDomainSetting> apiDomainSetting,
-            IMusicRecommandService musicRecommandService,
             ICommonService commonService)
         {
             this.httpClientService = httpClientService;
@@ -43,7 +41,6 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             this.englishSentenceService = englishSentenceService;
             this.speechService = speechService;
             this.apiDomainSetting = apiDomainSetting;
-            this.musicRecommandService = musicRecommandService;
             this.commonService = commonService;
         }
 
@@ -136,7 +133,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     messages = await this.GetEnglishSentence(replyToken);
                     break;
                 case TextMessageType.MusicRecommand:
-                    messages = await this.GetMusicRecommand(replyToken);
+                    messages = this.GetMusicRecommandQuickReply();
                     break;
                 case TextMessageType.ArticleRecommand:
                     messages = this.GetArticleRecommandQuickReply();
@@ -365,31 +362,49 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
         /// <summary>
         /// 取得音樂推薦模板訊息
+        /// 取得音樂推薦 QuickReply 訊息
         /// </summary>
         /// <param name="replyToken">回覆訊息的 replyToken</param>
         /// <returns></returns>
-        private async Task<List<ResultMessage>> GetMusicRecommand(string replyToken)
+        private List<ResultMessage> GetMusicRecommandQuickReply()
         {
-            var musicRecommand = await this.musicRecommandService.Recommand();
-
-            string jsonString =
-                await this.commonService.GetMessageTemplateByName("MusicRecommandTemplate.json");
-
-            if (string.IsNullOrEmpty(jsonString)) return null;
-
-            jsonString = jsonString.Replace("{#ImageUrl}", musicRecommand.ImageUrl);
-            jsonString = jsonString.Replace("{#Artist}", musicRecommand.Artist);
-            jsonString = jsonString.Replace("{#SongType}", musicRecommand.SongType);
-            jsonString = jsonString.Replace("{#Song}", musicRecommand.Song);
-            jsonString = jsonString.Replace("{#VideoUrl}", musicRecommand.VideoUrl);
-
-            var obj = JsonConvert.DeserializeObject<object>(jsonString);
+            var quickReply = new QuickReplyMessage()
+            {
+                Items = this.GetMusicRecommandQuickReplyItems()
+            };
 
             return new List<ResultMessage>()
             {
-                new FlexResultMessage(){ Contents = obj ,AltText = "音樂推薦"},
-                new StickerResultMessage(){ StickerId = "11087930", PackageId = "6362"}
+                new TextResultMessage(){ Text = "請選擇曲風" , QuickReply = quickReply}
             };
+        }
+
+        /// <summary>
+        /// 取得音樂推薦 QuickReply 訊息內容模板
+        /// </summary>
+        /// <returns></returns>
+        private List<QuickReplyItem> GetMusicRecommandQuickReplyItems()
+        {
+            var res = new List<QuickReplyItem>();
+
+            var quickItems = this.commonService.GetQuickReplyByType(QuickReplyType.MusicRecommand);
+
+            foreach (var item in quickItems)
+            {
+                res.Add(new QuickReplyItem
+                {
+                    Action = new QuickReplyAction()
+                    {
+                        Type = ActionType.Postback,
+                        Label = item.Description,
+                        Text = item.Description,
+                        Data = $"{QueryStringPropertyType.Type}={QuickReplyType.MusicRecommand}&{QueryStringPropertyType.Word}={item.ItemValue}"
+                    },
+                    ImageUrl = item.ImageUrl
+                });
+            }
+
+            return res;
         }
 
         /// <summary>

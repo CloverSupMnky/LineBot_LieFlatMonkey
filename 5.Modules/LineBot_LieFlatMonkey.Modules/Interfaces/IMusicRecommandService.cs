@@ -13,8 +13,10 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
     public interface IMusicRecommandService
     {
         /// <summary>
-        /// 推薦音樂
+        /// 依曲風推薦音樂
         /// </summary>
-        Task<MusicRecommandResp> Recommand();
+        /// <param name="musicCateType">曲風</param>
+        /// <returns></returns>
+        Task<MusicRecommandResp> RecommandByMusicCateType(string musicCateType);
     }
 }
