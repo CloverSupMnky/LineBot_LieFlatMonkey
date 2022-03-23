@@ -110,14 +110,15 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
             var searchListRequest = youtubeService.Search.List("snippet");
 
+            var searchSongName = song.song_name;
             // 限制歌名在 10 字內
-            if(song.song_name.Length > 10) 
+            if (searchSongName.Length > 10) 
             {
-                song.song_name = song.song_name.Substring(0, 10);
+                searchSongName = searchSongName.Substring(0, 10);
             }
 
             // 設定查詢值
-            searchListRequest.Q = $"{song.artist_name}-{song.song_name}";
+            searchListRequest.Q = $"{song.artist_name}-{searchSongName}";
 
             // 取得 1 筆結果
             searchListRequest.MaxResults = 1;
