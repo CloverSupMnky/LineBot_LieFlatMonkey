@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LineBot_LieFlatMonkey.Assets.Model.Resp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,6 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// </summary>
         /// <param name="type">看板類別</param>
         /// <returns></returns>
-        Task SearchPttByBoardType(string type);
+        Task<List<SearchPttResp>> SearchPttByBoardType(string type);
     }
 }

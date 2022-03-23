@@ -51,6 +51,6 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// </summary>
         /// <param name="type">看板類別</param>
         /// <returns></returns>
-        Task SearchPttByBoardType(string type);
+        Task<List<SearchPttResp>> SearchPttByBoardType(string type);
     }
 }

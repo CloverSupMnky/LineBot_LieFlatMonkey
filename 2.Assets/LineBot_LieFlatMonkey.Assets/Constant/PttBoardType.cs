@@ -19,7 +19,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         /// <summary>
         /// 西斯版
         /// </summary>
-        public const string Sex = "sex";
+        public const string Sex = "Sex";
 
         /// <summary>
         /// 表特版
@@ -34,7 +34,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         /// <summary>
         /// 娛樂版
         /// </summary>
-        public const string Joke = "joke";
+        public const string Joke = "Joke";
 
         /// <summary>
         /// 政黑版

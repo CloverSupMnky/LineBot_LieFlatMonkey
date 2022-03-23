@@ -7,6 +7,7 @@ Microsoft.CognitiveServices.Speech 1.20.0 (微軟智能語音服務)
 TagLibSharp 2.2.0 (讀取音頻檔長度)
 MediaToolkit.NetCore 0.1.0 搶鮮版(wav 轉 aac 檔)
 Google.Apis.YouTube.v3 1.56.0.2630 (YT 影片查詢)
+AngleSharp 1.0.0-alpha-844 搶鮮版(爬蟲結果轉 html 使用 selector 用)
 
 
 

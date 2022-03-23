@@ -19,9 +19,9 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
         [HttpGet("[action]/{boardtype}")]
         public async Task<IActionResult> SearchPtt(string boardtype) 
         {
-            await this.searchPttService.SearchPttByBoardType(boardtype);
+            var res = await this.searchPttService.SearchPttByBoardType(boardtype);
 
-            return Ok();
+            return Success(res);
         }
     }
 }
