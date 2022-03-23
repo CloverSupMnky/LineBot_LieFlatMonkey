@@ -382,7 +382,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     Action = new QuickReplyAction()
                     {
                         Type = ActionType.Postback,
-                        Label = item.ItemValue,
+                        Label = item.Description,
                         Text = item.Description,
                         Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchPTT}&{QueryStringPropertyType.Word}={item.ItemValue}"
                     }
