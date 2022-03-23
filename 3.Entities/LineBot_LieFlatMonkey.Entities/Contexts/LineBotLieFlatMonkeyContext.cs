@@ -8,6 +8,7 @@ namespace LineBot_LieFlatMonkey.Entities.Contexts
     public partial class LineBotLieFlatMonkeyContext : DbContext
     {
         public virtual DbSet<EnglishSentence> EnglishSentences { get; set; }
+        public virtual DbSet<QuickReply> QuickReplies { get; set; }
         public virtual DbSet<TarotCard> TarotCards { get; set; }
 
         public LineBotLieFlatMonkeyContext(DbContextOptions<LineBotLieFlatMonkeyContext> options) : base(options)
@@ -54,6 +55,28 @@ namespace LineBot_LieFlatMonkey.Entities.Contexts
                     .IsRequired()
                     .HasMaxLength(500)
                     .HasComment("英文翻譯");
+            });
+
+            modelBuilder.Entity<QuickReply>(entity =>
+            {
+                entity.HasKey(e => new { e.ItemType, e.ItemValue })
+                    .HasName("QuickReply_pkey");
+
+                entity.ToTable("QuickReply");
+
+                entity.HasComment("QuickReply 使用項目");
+
+                entity.Property(e => e.ItemType)
+                    .HasMaxLength(10)
+                    .HasComment("項目類別");
+
+                entity.Property(e => e.ItemValue)
+                    .HasMaxLength(20)
+                    .HasComment("項目值");
+
+                entity.Property(e => e.ImageUrl)
+                    .IsRequired()
+                    .HasMaxLength(500);
             });
 
             modelBuilder.Entity<TarotCard>(entity =>
