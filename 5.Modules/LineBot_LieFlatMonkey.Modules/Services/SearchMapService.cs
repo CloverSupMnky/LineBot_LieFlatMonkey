@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace LineBot_LieFlatMonkey.Modules.Services
 {
@@ -62,7 +63,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             res.Address = searchRes.vicinity;
             res.Rating = searchRes.rating.ToString();
 
-            res.MapUrl =$"https://www.google.com/maps/search/?api=1&query={searchRes.vicinity}&query_palce_id={searchRes.place_id}";
+            res.MapUrl =$"https://www.google.com/maps/search/?api=1&query={HttpUtility.UrlEncode(searchRes.vicinity)}&query_palce_id={searchRes.place_id}";
 
             if (searchRes.photos != null && searchRes.photos.Length > 0) 
             {
