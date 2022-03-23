@@ -9,7 +9,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
     /// <summary>
     /// QueryString 類別
     /// </summary>
-    public class QueryStringType
+    public class QueryStringPropertyType
     {
         public const string Type = "type";
 

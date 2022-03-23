@@ -1,4 +1,5 @@
 ﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Entities.Models;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using URF.Core.Abstractions.Trackable;
 
 namespace LineBot_LieFlatMonkey.Modules.Services
 {
@@ -14,6 +16,13 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     /// </summary>
     public class CommonService : ICommonService
     {
+        private readonly ITrackableRepository<QuickReply> quickReplyRepo;
+
+        public CommonService(ITrackableRepository<QuickReply> quickReplyRepo)
+        {
+            this.quickReplyRepo = quickReplyRepo;
+        }
+
         /// <summary>
         /// 取得亂數值
         /// </summary>
@@ -44,6 +53,18 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             }
 
             return res;
+        }
+
+        /// <summary>
+        /// 依類型取得 QuickReply 資料
+        /// </summary>
+        /// <param name="type">QuickReply 類型</param>
+        /// <returns></returns>
+        public List<QuickReply> GetQuickReplyByType(string type)
+        {
+            return this.quickReplyRepo.Queryable()
+                .Where(q => q.ItemType == type)
+                .ToList();
         }
     }
 }

@@ -10,6 +10,6 @@ namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
     public class ResultMessage
     {
         [JsonProperty("quickReply")]
-        public QuickReply QuickReply { get; set; }
+        public QuickReplyMessage QuickReply { get; set; }
     }
 }

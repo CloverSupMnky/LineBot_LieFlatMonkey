@@ -72,7 +72,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         /// <returns></returns>
         private async Task LocationMessage(Message message, string replyToken)
         {
-            var quickReply = new QuickReply()
+            var quickReply = new QuickReplyMessage()
             {
                 Items = this.GetLocationReplyItems(message.Latitude,message.Longitude)
             };
@@ -95,19 +95,22 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         {
             var res = new List<QuickReplyItem>();
 
-            res.Add(new QuickReplyItem{ Action = new QuickReplyAction() { 
-                Type = ActionType.Postback, 
-                Label = "飲料", 
-                Text = "飲料", 
-                Data = $"{QueryStringType.Type}=map&{QueryStringType.Word}=飲料&{QueryStringType.Latitude}={latitude}&{QueryStringType.Longitude}={longitude}"
-            }});
+            var quickItems = this.commonService.GetQuickReplyByType(QuickReplyType.SearchMap);
 
-            res.Add(new QuickReplyItem{ Action = new QuickReplyAction() { 
-                Type = ActionType.Postback, 
-                Label = "食物", 
-                Text = "食物", 
-                Data = $"{QueryStringType.Type}=map&{QueryStringType.Word}=食物&{QueryStringType.Latitude}={latitude}&{QueryStringType.Longitude}={longitude}" 
-            }});
+            foreach (var item in quickItems) 
+            {
+                res.Add(new QuickReplyItem
+                {
+                    Action = new QuickReplyAction()
+                    {
+                        Type = ActionType.Postback,
+                        Label = item.ItemValue,
+                        Text = item.ItemValue,
+                        Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchMap}&{QueryStringPropertyType.Word}={item.ItemValue}&{QueryStringPropertyType.Latitude}={latitude}&{QueryStringPropertyType.Longitude}={longitude}"
+                    },
+                    ImageUrl = item.ImageUrl
+                });
+            }
 
             return res;
         }

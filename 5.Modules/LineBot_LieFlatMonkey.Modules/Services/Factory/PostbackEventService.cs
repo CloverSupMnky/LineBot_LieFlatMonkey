@@ -6,6 +6,7 @@ using LineBot_LieFlatMonkey.Modules.Interfaces.Factory;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -35,34 +36,59 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
         public async Task Invoke(Event eventInfo)
         {
-            var messages = await this.SearchMapRes(eventInfo.Postback.Data);
+            var messages = await this.GetPostbackMessages(eventInfo.Postback.Data);
+
+            if(messages == null) 
+            {
+                // TODO 處理
+                return;
+            }
 
             await this.httpClientService.ReplyMessageAsync(messages,eventInfo.ReplyToken);
         }
 
         /// <summary>
-        /// 取得探索地圖後回傳模板訊息
+        /// 取得對應 Postback 類型模板訊息
         /// </summary>
-        /// <param name="queryString"></param>
+        /// <param name="queryString">查詢字串</param>
         /// <returns></returns>
-        private async Task<List<ResultMessage>> SearchMapRes(string queryString) 
+        private async Task<List<ResultMessage>> GetPostbackMessages(string queryString) 
+        {
+            var query = HttpUtility.ParseQueryString(queryString);
+
+            var type = query[QueryStringPropertyType.Type];
+
+            switch (type)
+            {
+                case QuickReplyType.SearchMap:
+                    return await this.GetSearchMapMessages(query);
+                default:
+                    return null;
+            }
+        }
+
+        /// <summary>
+        /// 取得地圖探索模板訊息
+        /// </summary>
+        /// <param name="query">查詢物件</param>
+        /// <returns></returns>
+        private async Task<List<ResultMessage>> GetSearchMapMessages(
+            NameValueCollection query)
         {
             try 
             {
-                var query = HttpUtility.ParseQueryString(queryString);
-
                 var mapInfos = await this.searchMapService.SearchMap(
-                    query[QueryStringType.Word], 
-                    query[QueryStringType.Latitude], 
-                    query[QueryStringType.Longitude]);
+                        query[QueryStringPropertyType.Word],
+                        query[QueryStringPropertyType.Latitude],
+                        query[QueryStringPropertyType.Longitude]);
 
                 var carouselResultMessage = new CarouselResultMessage();
                 carouselResultMessage.Contents = await this.GetSearchMapResContentMessage(mapInfos);
 
-                //if(carouselResultMessage.Contents.Count == 0) 
-                //{
-                //    return null;
-                //}
+                if (carouselResultMessage.Contents.Count == 0)
+                {
+                    return null;
+                }
 
                 return new List<ResultMessage>()
                 {

@@ -42,7 +42,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             var res = searchRes.results
                 .OrderByDescending(r => r.rating)
                 .Where(r => r.photos != null && r.photos.Length > 0)
-                .Take(5)
+                .Take(10)
                 .Select(r => this.ParseMapInfo(r))
                 .ToList();
 

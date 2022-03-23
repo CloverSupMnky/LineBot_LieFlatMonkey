@@ -155,10 +155,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// <param name="searchWord">查詢文字</param>
         /// <param name="latitude">緯度</param>
         /// <param name="longitude">經度</param>
-        /// <param name="radius">查詢距離</param>
+        /// <param name="radius">查詢距離(公尺)</param>
         /// <returns></returns>
         public async Task<SearchMapResp> SearchMapAsync(
-            string searchWord, string latitude, string longitude,int radius = 600)
+            string searchWord, string latitude, string longitude,int radius = 1000)
         {
             var res = new SearchMapResp();
             try

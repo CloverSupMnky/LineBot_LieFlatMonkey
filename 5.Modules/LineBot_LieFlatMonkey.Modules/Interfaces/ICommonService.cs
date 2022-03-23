@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LineBot_LieFlatMonkey.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,5 +24,12 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<string> GetMessageTemplateByName(string name);
+
+        /// <summary>
+        /// 依類型取得 QuickReply 資料
+        /// </summary>
+        /// <param name="type">QuickReply 類型</param>
+        /// <returns></returns>
+        List<QuickReply> GetQuickReplyByType(string type);
     }
 }

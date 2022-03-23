@@ -113,7 +113,7 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.AddScoped<ITrackableRepository<TarotCard>, TrackableRepository<TarotCard>>();
 
             services.AddScoped<ITrackableRepository<EnglishSentence>, TrackableRepository<EnglishSentence>>();
-
+            services.AddScoped<ITrackableRepository<QuickReply>, TrackableRepository<QuickReply>>();
             #endregion
         }
 

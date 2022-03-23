@@ -14,6 +14,6 @@ namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
         public string Type { get; set; } = MessageType.Carousel;
 
         [JsonProperty("contents")]
-        public object Contents { get; set; }
+        public List<object> Contents { get; set; }
     }
 }
