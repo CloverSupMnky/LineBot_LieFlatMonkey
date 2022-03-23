@@ -64,6 +64,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         {
             return this.quickReplyRepo.Queryable()
                 .Where(q => q.ItemType == type)
+                .OrderBy(q => q.Sort)
                 .ToList();
         }
     }
