@@ -138,6 +138,9 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 case TextMessageType.MusicRecommand:
                     messages = await this.GetMusicRecommand(replyToken);
                     break;
+                case TextMessageType.ArticleRecommand:
+                    messages = this.GetArticleRecommandQuickReply();
+                    break;
             }
 
             if(messages == null) 
@@ -342,6 +345,51 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 new FlexResultMessage(){ Contents = obj ,AltText = "音樂推薦"},
                 new StickerResultMessage(){ StickerId = "11087930", PackageId = "6362"}
             };
+        }
+
+        /// <summary>
+        /// 取得熱門文章推薦 QuickReply 項目
+        /// </summary>
+        /// <param name="replyToken">回覆訊息的 replyToken</param>
+        /// <returns></returns>
+        private List<ResultMessage> GetArticleRecommandQuickReply()
+        {
+            var quickReply = new QuickReplyMessage()
+            {
+                Items = this.GetArticleRecommandQuickReplyItems()
+            };
+
+            return new List<ResultMessage>()
+            {
+                new TextResultMessage(){ Text = "請選擇 PTT 看板" , QuickReply = quickReply}
+            };
+        }
+
+        /// <summary>
+        /// 取得熱門文章推薦 QuickReply 內容項目
+        /// </summary>
+        /// <returns></returns>
+        private List<QuickReplyItem> GetArticleRecommandQuickReplyItems()
+        {
+            var res = new List<QuickReplyItem>();
+
+            var quickItems = this.commonService.GetQuickReplyByType(QuickReplyType.SearchPTT);
+
+            foreach (var item in quickItems)
+            {
+                res.Add(new QuickReplyItem
+                {
+                    Action = new QuickReplyAction()
+                    {
+                        //Type = ActionType.Postback,
+                        //Label = item.ItemValue,
+                        //Text = item.ItemValue,
+                        //Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchMap}&{QueryStringPropertyType.Word}={item.ItemValue}&{QueryStringPropertyType.Latitude}={latitude}&{QueryStringPropertyType.Longitude}={longitude}"
+                    }
+                });
+            }
+
+            return res;
         }
     }
 }

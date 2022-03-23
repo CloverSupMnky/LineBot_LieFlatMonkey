@@ -12,5 +12,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
     public class QuickReplyType
     {
         public const string SearchMap = "SearchMap";
+
+        public const string SearchPTT = "SearchPTT";
     }
 }
