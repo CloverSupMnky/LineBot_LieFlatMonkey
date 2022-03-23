@@ -1,4 +1,5 @@
-﻿using LineBot_LieFlatMonkey.Assets.Model.LineBot;
+﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Assets.Model.LineBot;
 using LineBot_LieFlatMonkey.Modules.Factory;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using System;
@@ -15,9 +16,12 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     public class WebHookEventService : IWebHookEventService
     {
         private readonly EventFactory eventFactory;
-        public WebHookEventService(EventFactory eventFactory)
+        private readonly ICommonService commonService;
+
+        public WebHookEventService(EventFactory eventFactory, ICommonService commonService)
         {
             this.eventFactory = eventFactory;
+            this.commonService = commonService;
         }
 
         /// <summary>
@@ -28,7 +32,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         {
             if(webHookEvent == null || webHookEvent.Events == null) 
             {
-                // TODO 處理錯誤
+                this.commonService
+                    .PushErrorMessage($"{SystemMessageType.SysError}-無 WebHookEvent 資料")
+                    .GetAwaiter()
+                    .GetResult();
 
                 return;
             }
@@ -44,7 +51,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             }
             catch(Exception ex) 
             {
-                // TODO 處理錯誤
+                this.commonService
+                    .PushErrorMessage($"{SystemMessageType.SysError}-{ex.Message}")
+                    .GetAwaiter()
+                    .GetResult();
 
                 return;
             }

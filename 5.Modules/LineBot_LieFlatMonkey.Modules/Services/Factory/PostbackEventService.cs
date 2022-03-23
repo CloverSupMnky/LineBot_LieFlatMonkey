@@ -43,7 +43,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             if(messages == null) 
             {
-                // TODO 處理
+                await this.commonService.ReplyErrorMessage(SystemMessageType.NoData, eventInfo.ReplyToken);
+
                 return;
             }
 

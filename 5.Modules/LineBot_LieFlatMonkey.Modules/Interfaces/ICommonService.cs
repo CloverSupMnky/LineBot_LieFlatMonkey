@@ -31,5 +31,19 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="type">QuickReply 類型</param>
         /// <returns></returns>
         List<QuickReply> GetQuickReplyByType(string type);
+
+        /// <summary>
+        /// 回傳錯誤訊息-Reply-聊天室
+        /// </summary>
+        /// <param name="text">回傳訊息</param>
+        /// <returns></returns>
+        Task ReplyErrorMessage(string text, string replyToken);
+
+        /// <summary>
+        /// 回傳錯誤訊息-Push 自己
+        /// </summary>
+        /// <param name="text">回傳訊息</param>
+        /// <returns></returns>
+        Task PushErrorMessage(string text);
     }
 }

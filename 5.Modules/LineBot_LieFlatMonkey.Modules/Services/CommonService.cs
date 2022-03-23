@@ -1,4 +1,5 @@
 ﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Assets.Model.LineBot;
 using LineBot_LieFlatMonkey.Entities.Models;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using System;
@@ -17,9 +18,13 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     public class CommonService : ICommonService
     {
         private readonly ITrackableRepository<QuickReply> quickReplyRepo;
+        private readonly IHttpClientService httpClientService;
 
-        public CommonService(ITrackableRepository<QuickReply> quickReplyRepo)
+        public CommonService(
+            IHttpClientService httpClientService,
+            ITrackableRepository<QuickReply> quickReplyRepo)
         {
+            this.httpClientService = httpClientService;
             this.quickReplyRepo = quickReplyRepo;
         }
 
@@ -66,6 +71,44 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 .Where(q => q.ItemType == type)
                 .OrderBy(q => q.Sort)
                 .ToList();
+        }
+
+        /// <summary>
+        /// 回傳錯誤訊息-Reply-聊天室
+        /// </summary>
+        /// <param name="text">回傳訊息</param>
+        /// <returns></returns>
+        public async Task ReplyErrorMessage(string text,string replyToken)
+        {
+            var messages = this.GetResultMessage(text);
+
+            await this.httpClientService.ReplyMessageAsync(messages,replyToken);
+        }
+
+        /// <summary>
+        /// 回傳錯誤訊息-Push 自己
+        /// </summary>
+        /// <param name="text">回傳訊息</param>
+        /// <returns></returns>
+        public async Task PushErrorMessage(string text)
+        {
+            var messages = this.GetResultMessage(text);
+
+            await this.httpClientService.PushMessageAsync(messages);
+        }
+
+        /// <summary>
+        /// 取得回傳模板
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private List<ResultMessage> GetResultMessage(string text) 
+        {
+            return new List<ResultMessage>()
+            {
+                new TextResultMessage(){ Text = text},
+                new StickerResultMessage(){PackageId = "8525" , StickerId = "16581310"}
+            };
         }
     }
 }

@@ -104,7 +104,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     Action = new QuickReplyAction()
                     {
                         Type = ActionType.Postback,
-                        Label = item.ItemValue,
+                        Label = item.Description,
                         Text = item.Description,
                         Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchMap}&{QueryStringPropertyType.Word}={item.ItemValue}&{QueryStringPropertyType.Latitude}={latitude}&{QueryStringPropertyType.Longitude}={longitude}"
                     },
@@ -145,7 +145,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             if(messages == null) 
             {
-                // TODO 錯誤處理
+                await this.commonService.ReplyErrorMessage(SystemMessageType.NoData, replyToken);
+
                 return;
             }
 
