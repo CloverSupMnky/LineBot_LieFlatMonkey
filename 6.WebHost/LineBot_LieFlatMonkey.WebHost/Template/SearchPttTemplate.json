@@ -1,0 +1,87 @@
+{
+  "type": "bubble",
+  "size": "mega",
+  "hero": {
+    "type": "image",
+    "url": "https://i.imgur.com/s8tMikC.png",
+    "size": "full",
+    "aspectMode": "cover",
+    "aspectRatio": "2:1"
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "{#Title}",
+        "weight": "bold",
+        "size": "md",
+        "wrap": true,
+        "margin": "sm"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "wrap": true,
+                "contents": [
+                  {
+                    "type": "span",
+                    "text": "推文數 : ",
+                    "weight": "bold"
+                  },
+                  {
+                    "type": "span",
+                    "text": "{#ThumbsUp}",
+                    "weight": "bold",
+                    "size": "md",
+                    "decoration": "underline",
+                    "color": "#DC3545"
+                  }
+                ],
+                "weight": "bold"
+              }
+            ],
+            "margin": "md"
+          }
+        ]
+      }
+    ],
+    "spacing": "sm",
+    "paddingAll": "13px"
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "文章連結",
+        "color": "#007BFF",
+        "wrap": true,
+        "align": "center",
+        "weight": "bold",
+        "size": "lg",
+        "action": {
+          "type": "uri",
+          "label": "action",
+          "uri": "{#ArticleUrl}"
+        }
+      }
+    ],
+    "borderColor": "#ffffff"
+  },
+  "styles": {
+    "hero": {
+      "backgroundColor": "#03303ACB"
+    }
+  }
+}

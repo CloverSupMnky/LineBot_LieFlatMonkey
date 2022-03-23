@@ -24,6 +24,6 @@ namespace LineBot_LieFlatMonkey.Assets.Model.Resp
         /// <summary>
         /// 文章連結
         /// </summary>
-        public string PttLink { get; set; }
+        public string ArticleUrl { get; set; }
     }
 }

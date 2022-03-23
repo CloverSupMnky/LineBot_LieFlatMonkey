@@ -21,17 +21,20 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
     public class PostbackEventService : IEventFactoryService
     {
         private readonly IHttpClientService httpClientService;
-        private readonly ISearchMapService searchMapService; 
+        private readonly ISearchMapService searchMapService;
+        private readonly ISearchPttService searchPttService;
         private readonly ICommonService commonService;
 
         public PostbackEventService(
             IHttpClientService httpClientService, 
             ISearchMapService searchMapService,
+            ISearchPttService searchPttService,
             ICommonService commonService)
         {
             this.httpClientService = httpClientService;
             this.searchMapService = searchMapService;
             this.commonService = commonService;
+            this.searchPttService = searchPttService;
         }
 
         public async Task Invoke(Event eventInfo)
@@ -62,9 +65,74 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             {
                 case QuickReplyType.SearchMap:
                     return await this.GetSearchMapMessages(query);
+                case QuickReplyType.SearchPTT:
+                    return await this.GetSearchPttMessages(query);
                 default:
                     return null;
             }
+        }
+
+        /// <summary>
+        /// 取得 Ptt 熱門文章模板訊息
+        /// </summary>
+        /// <param name="query">查詢物件</param>
+        /// <returns></returns>
+        private async Task<List<ResultMessage>> GetSearchPttMessages(
+            NameValueCollection query)
+        {
+            try 
+            {
+                var pttInfos =
+                    await this.searchPttService.SearchPttByBoardType(query[QueryStringPropertyType.Word]);
+
+                var carouselResultMessage = new CarouselResultMessage();
+                carouselResultMessage.Contents = await this.GetSearchPttResContentMessage(pttInfos);
+
+                if (carouselResultMessage.Contents.Count == 0)
+                {
+                    return null;
+                }
+
+                return new List<ResultMessage>()
+                {
+                    new FlexResultMessage(){ Contents = carouselResultMessage ,AltText = "熱門文章推薦"}
+                };
+            }
+            catch 
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 取得熱門文章查詢結果內容模板訊息
+        /// </summary>
+        /// <param name="searchRes">熱門文章推薦結果</param>
+        /// <returns></returns>
+        private async Task<List<object>> GetSearchPttResContentMessage(List<SearchPttResp> pttInfos)
+        {
+            string jsonString =
+                await this.commonService.GetMessageTemplateByName("SearchPttTemplate.json");
+
+            if (string.IsNullOrEmpty(jsonString)) return null;
+
+            var tempString = string.Empty;
+            var res = new List<object>();
+            object obj = null;
+            foreach (var pttInfo in pttInfos)
+            {
+                tempString = jsonString;
+
+                tempString = tempString.Replace("{#Title}", pttInfo.Title);
+                tempString = tempString.Replace("{#ThumbsUp}", pttInfo.ThumbsUp);
+                tempString = tempString.Replace("{#ArticleUrl}", pttInfo.ArticleUrl);
+
+                obj = JsonConvert.DeserializeObject<object>(tempString);
+
+                res.Add(obj);
+            }
+
+            return res;
         }
 
         /// <summary>

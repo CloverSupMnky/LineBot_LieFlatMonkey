@@ -105,7 +105,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     {
                         Type = ActionType.Postback,
                         Label = item.ItemValue,
-                        Text = item.ItemValue,
+                        Text = item.Description,
                         Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchMap}&{QueryStringPropertyType.Word}={item.ItemValue}&{QueryStringPropertyType.Latitude}={latitude}&{QueryStringPropertyType.Longitude}={longitude}"
                     },
                     ImageUrl = item.ImageUrl
@@ -381,10 +381,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 {
                     Action = new QuickReplyAction()
                     {
-                        //Type = ActionType.Postback,
-                        //Label = item.ItemValue,
-                        //Text = item.ItemValue,
-                        //Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchMap}&{QueryStringPropertyType.Word}={item.ItemValue}&{QueryStringPropertyType.Latitude}={latitude}&{QueryStringPropertyType.Longitude}={longitude}"
+                        Type = ActionType.Postback,
+                        Label = item.ItemValue,
+                        Text = item.Description,
+                        Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchPTT}&{QueryStringPropertyType.Word}={item.ItemValue}"
                     }
                 });
             }

@@ -331,7 +331,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
                 searchPttResp.Title = aElement.TextContent;
                 searchPttResp.ThumbsUp = spanElement.TextContent;
-                searchPttResp.PttLink = $"https://www.ptt.cc{aElement.GetAttribute("href")}";
+                searchPttResp.ArticleUrl = $"https://www.ptt.cc{aElement.GetAttribute("href")}";
 
                 res.Add(searchPttResp);
             }
