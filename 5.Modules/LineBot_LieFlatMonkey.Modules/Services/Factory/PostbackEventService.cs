@@ -24,17 +24,20 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         private readonly ISearchMapService searchMapService;
         private readonly ISearchPttService searchPttService;
         private readonly ICommonService commonService;
+        private readonly ITarotCardService tarotCardService;
 
         public PostbackEventService(
             IHttpClientService httpClientService, 
             ISearchMapService searchMapService,
             ISearchPttService searchPttService,
-            ICommonService commonService)
+            ICommonService commonService,
+            ITarotCardService tarotCardService)
         {
             this.httpClientService = httpClientService;
             this.searchMapService = searchMapService;
             this.commonService = commonService;
             this.searchPttService = searchPttService;
+            this.tarotCardService = tarotCardService;
         }
 
         public async Task Invoke(Event eventInfo)
@@ -68,9 +71,42 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     return await this.GetSearchMapMessages(query);
                 case QuickReplyType.SearchPTT:
                     return await this.GetSearchPttMessages(query);
+                case QuickReplyType.TarotCard:
+                    return await this.GetTarotCardMessages();
                 default:
                     return null;
             }
+        }
+
+        /// <summary>
+        /// 取得塔羅牌一般運勢占卜結果訊息
+        /// </summary>
+        /// <returns></returns>
+        private async Task<List<ResultMessage>> GetTarotCardMessages()
+        {
+            var tarotCard =
+                this.tarotCardService.FortuneTellingByType(FortuneTellingType.Normal);
+
+            string jsonString =
+                await this.commonService.GetMessageTemplateByName("TarotCardTemplate.json");
+
+            if (string.IsNullOrEmpty(jsonString)) return null;
+
+            jsonString = jsonString.Replace("{#ImageUrl}", tarotCard.ImageUrl);
+            jsonString = jsonString.Replace("{#Name}", tarotCard.Name);
+            jsonString = jsonString.Replace("{#NameEN}", tarotCard.NameEn);
+            jsonString = jsonString.Replace("{#FaceType}", tarotCard.FaceType);
+            jsonString = jsonString.Replace("{#Mean}", tarotCard.Mean);
+            jsonString = jsonString.Replace("{#MeanWord}", tarotCard.MeanWord);
+            jsonString = jsonString.Replace("{#Desc}", tarotCard.Desc);
+
+            var obj = JsonConvert.DeserializeObject<object>(jsonString);
+
+            return new List<ResultMessage>()
+            {
+                new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"},
+                new StickerResultMessage(){ StickerId = "16581294", PackageId = "8525"}
+            };
         }
 
         /// <summary>

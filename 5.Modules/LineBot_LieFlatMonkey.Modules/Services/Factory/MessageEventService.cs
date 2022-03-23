@@ -127,10 +127,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             switch (message.Text)
             {
                 case TextMessageType.TarotCardDaily:
-                    messages = await this.TarotCardMessage(FortuneTellingType.Daily);
+                    messages = await this.TarotCardMessage();
                     break;
                 case TextMessageType.TarotCardNormal:
-                    messages = await this.TarotCardMessage(FortuneTellingType.Normal);
+                    messages = this.GetTarotCardNormalQuickReply();
                     break;
                 case TextMessageType.EnglishStence:
                     messages = await this.GetEnglishSentence(replyToken);
@@ -156,12 +156,11 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         /// <summary>
         /// 塔羅牌訊息處理
         /// </summary>
-        /// <param name="fortuneTellingType">塔羅牌占卜方式</param>
         /// <returns></returns>
-        private async Task<List<ResultMessage>> TarotCardMessage(string fortuneTellingType) 
+        private async Task<List<ResultMessage>> TarotCardMessage()
         {
             var tarotCard =
-                this.tarotCardService.FortuneTellingByType(fortuneTellingType);
+                this.tarotCardService.FortuneTellingByType(FortuneTellingType.Daily);
 
             string jsonString =
                 await this.commonService.GetMessageTemplateByName("TarotCardTemplate.json");
@@ -183,6 +182,51 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"},
                 new StickerResultMessage(){ StickerId = "16581294", PackageId = "8525"}
             };
+        }
+
+        /// <summary>
+        /// 取得塔羅牌一般運勢占卜 QuockReply 訊息
+        /// </summary>
+        /// <returns></returns>
+        private List<ResultMessage> GetTarotCardNormalQuickReply() 
+        {
+            var quickReply = new QuickReplyMessage()
+            {
+                Items = this.GetTarotCardQuickReplyItems()
+            };
+
+            return new List<ResultMessage>()
+            {
+                new TextResultMessage(){ Text = "請想著你的問題，然後點選抽牌" , QuickReply = quickReply}
+            };
+        }
+
+        /// <summary>
+        /// 取得塔羅牌一般運勢占卜 QuockReply 訊息內容模板
+        /// </summary>
+        /// <returns></returns>
+        private List<QuickReplyItem> GetTarotCardQuickReplyItems()
+        {
+            var res = new List<QuickReplyItem>();
+
+            var quickItems = this.commonService.GetQuickReplyByType(QuickReplyType.TarotCard);
+
+            foreach (var item in quickItems)
+            {
+                res.Add(new QuickReplyItem
+                {
+                    Action = new QuickReplyAction()
+                    {
+                        Type = ActionType.Postback,
+                        Label = item.Description,
+                        Text = item.Description,
+                        Data = $"{QueryStringPropertyType.Type}={QuickReplyType.TarotCard}&{QueryStringPropertyType.Word}={item.ItemValue}"
+                    },
+                    ImageUrl = item.ImageUrl
+                });
+            }
+
+            return res;
         }
 
         /// <summary>
@@ -386,7 +430,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                         Label = item.Description,
                         Text = item.Description,
                         Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchPTT}&{QueryStringPropertyType.Word}={item.ItemValue}"
-                    }
+                    },
+                    ImageUrl = item.ImageUrl
                 });
             }
 
