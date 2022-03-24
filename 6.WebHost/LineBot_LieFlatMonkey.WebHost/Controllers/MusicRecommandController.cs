@@ -20,7 +20,7 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> GetRecommand() 
         {
-            var res = await this.musicRecommandService.RecommandByMusicCateType(MusicCateType.Chinese);
+            var res = await this.musicRecommandService.RecommandByMusicCateType(MusicCateType.RealTime);
 
             return Success(res);
         }

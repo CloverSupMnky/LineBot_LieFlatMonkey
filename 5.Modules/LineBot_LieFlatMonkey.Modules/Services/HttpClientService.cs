@@ -146,6 +146,18 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                             JsonConvert.DeserializeObject<GetMusicInfoResp>(responseResult);
 
                         res = getMusicInfoResp.data.charts.song;
+
+                        if (musicCate == MusicCateType.RealTime) 
+                        {
+                            res = getMusicInfoResp.data.charts.newrelease.Select(n =>
+                            {
+                                return new Song()
+                                {
+                                    artist_name = n.artist_name,
+                                    song_name = n.song_name
+                                };
+                            }).ToList();
+                        }
                     }
                 }
 
