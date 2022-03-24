@@ -102,7 +102,6 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     {
                         Type = ActionType.Postback,
                         Label = item.Description,
-                        Text = item.Description,
                         Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchMap}&{QueryStringPropertyType.Word}={item.ItemValue}&{QueryStringPropertyType.Latitude}={latitude}&{QueryStringPropertyType.Longitude}={longitude}"
                     },
                     ImageUrl = item.ImageUrl
@@ -238,7 +237,6 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     {
                         Type = ActionType.Postback,
                         Label = item.Description,
-                        Text = item.Description,
                         Data = $"{QueryStringPropertyType.Type}={QuickReplyType.TarotCard}&{QueryStringPropertyType.Word}={item.ItemValue}"
                     },
                     ImageUrl = item.ImageUrl
@@ -418,7 +416,6 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     {
                         Type = ActionType.Postback,
                         Label = item.Description,
-                        Text = item.Description,
                         Data = $"{QueryStringPropertyType.Type}={QuickReplyType.MusicRecommand}&{QueryStringPropertyType.Word}={item.ItemValue}"
                     },
                     ImageUrl = item.ImageUrl
@@ -464,7 +461,6 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                     {
                         Type = ActionType.Postback,
                         Label = item.Description,
-                        Text = item.Description,
                         Data = $"{QueryStringPropertyType.Type}={QuickReplyType.SearchPTT}&{QueryStringPropertyType.Word}={item.ItemValue}"
                     },
                     ImageUrl = item.ImageUrl
