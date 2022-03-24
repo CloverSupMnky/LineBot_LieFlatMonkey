@@ -1,0 +1,170 @@
+{
+  "type": "bubble",
+  "size": "mega",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "Hi！{#UserName}",
+        "weight": "bold"
+      },
+      {
+        "type": "text",
+        "text": "歡迎加入 『猴子の日常』",
+        "weight": "bold",
+        "size": "lg",
+        "margin": "md"
+      },
+      {
+        "type": "text",
+        "text": "功能有下列幾個",
+        "weight": "bold",
+        "size": "md",
+        "margin": "md"
+      },
+      {
+        "type": "separator",
+        "margin": "sm"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "1. 每日運勢占卜",
+                "size": "md",
+                "weight": "bold",
+                "color": "#56AF70"
+              },
+              {
+                "type": "text",
+                "text": "2. 直覺運勢占卜",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "3. 熱門音樂推薦",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "4. 英文佳句(名人,電影)",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "5. 附近地圖探索(1公里內)",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "6. PTT 熱門文章推薦",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold"
+              }
+            ]
+          }
+        ],
+        "margin": "sm"
+      },
+      {
+        "type": "separator",
+        "margin": "sm"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "md",
+        "contents": [
+          {
+            "type": "text",
+            "wrap": true,
+            "contents": [
+              {
+                "type": "span",
+                "text": "以上功能關於占卜的部分，內容均為"
+              },
+              {
+                "type": "span",
+                "text": " Ta19 ",
+                "weight": "bold",
+                "size": "lg",
+                "color": "#DC3545"
+              },
+              {
+                "type": "span",
+                "text": "所有，更多相關內容歡迎至原作者網站查看"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "https://ta19.site/",
+            "size": "lg",
+            "weight": "bold",
+            "align": "center",
+            "action": {
+              "type": "uri",
+              "label": "action",
+              "uri": "https://ta19.site/"
+            },
+            "color": "#0000FF",
+            "decoration": "underline"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "若使用上有任何疑慮不妥的地方，或是有其他的建議，歡迎來信至作者信箱",
+        "wrap": true
+      },
+      {
+        "type": "text",
+        "text": "cloversupmnky@gmail.com",
+        "weight": "bold",
+        "align": "center",
+        "color": "#0000FF",
+        "decoration": "underline"
+      },
+      {
+        "type": "text",
+        "size": "xs",
+        "wrap": true,
+        "contents": [
+          {
+            "type": "span",
+            "text": "P.S 猴子の日常各功能開發均使用免費方案，因此會有"
+          },
+          {
+            "type": "span",
+            "text": "每個月",
+            "color": "#DC3545",
+            "weight": "bold"
+          },
+          {
+            "type": "span",
+            "text": "使用次數的限制，請且用且珍惜 ಥ⌣ಥ"
+          }
+        ],
+        "margin": "sm"
+      }
+    ]
+  }
+}

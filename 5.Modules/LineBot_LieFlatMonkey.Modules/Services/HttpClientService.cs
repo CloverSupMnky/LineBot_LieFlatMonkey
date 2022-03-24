@@ -48,7 +48,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                     messages = messages
                 });
 
-            await this.SendAsync(LineBotMessageEndpoint.Push, reqJson);
+            await this.SendPostAsync(LineBotMessageEndpoint.Push, reqJson);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                     messages = messages
                 });
 
-            await this.SendAsync(LineBotMessageEndpoint.Reply, reqJson);
+            await this.SendPostAsync(LineBotMessageEndpoint.Reply, reqJson);
         }
 
         /// <summary>
@@ -86,12 +86,12 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         }
 
         /// <summary>
-        /// 發送訊息
+        /// 發送 Post 訊息
         /// </summary>
         /// <param name="reqUrl">Line Bot Message Endpoint</param>
         /// <param name="reqJson">Request Json</param>
         /// <returns></returns>
-        private async Task SendAsync(string reqUrl,string reqJson)
+        private async Task SendPostAsync(string reqUrl,string reqJson)
         {
             var httpReqMsg = new HttpRequestMessage(HttpMethod.Post, reqUrl);
 
@@ -337,6 +337,50 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             }
 
             return res;
+        }
+
+        /// <summary>
+        /// 依 UserId 取得使用者資訊
+        /// </summary>
+        /// <param name="userId">使用者 Id</param>
+        /// <returns></returns>
+        public async Task<UserProfile> GetUserProfileByUserIdAsync(string userId)
+        {
+            var endpoint = $"{LineBotMessageEndpoint.GetUserProfile}/{userId}";
+
+            var responseStr = await this.SendGetAsync(endpoint);
+
+            try 
+            {
+                return JsonConvert.DeserializeObject<UserProfile>(responseStr);
+            }
+            catch 
+            {
+                return new UserProfile();
+            }
+        }
+
+        /// <summary>
+        /// 發送 Get 訊息
+        /// </summary>
+        /// <param name="reqUrl">Line Bot Message Endpoint</param>
+        /// <param name="reqJson">Request Json</param>
+        /// <returns></returns>
+        private async Task<string> SendGetAsync(string reqUrl)
+        {
+            var httpReqMsg = new HttpRequestMessage(HttpMethod.Get, reqUrl);
+
+            using (var httpClient = new HttpClient())
+            {
+                // Accept Type Header
+                // httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
+                httpClient.DefaultRequestHeaders
+                    .Add("Authorization", $"Bearer {this.lineBotSetting.Value.AccessToKen}");
+
+                var resp = await httpClient.SendAsync(httpReqMsg);
+
+                return await resp.Content.ReadAsStringAsync();
+            }
         }
     }
 }

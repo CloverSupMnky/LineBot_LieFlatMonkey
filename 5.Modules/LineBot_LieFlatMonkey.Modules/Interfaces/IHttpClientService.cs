@@ -52,5 +52,12 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="type">看板類別</param>
         /// <returns></returns>
         Task<List<SearchPttResp>> SearchPttByBoardType(string type);
+
+        /// <summary>
+        /// 依 UserId 取得使用者資訊
+        /// </summary>
+        /// <param name="userId">使用者 Id</param>
+        /// <returns></returns>
+        Task<UserProfile> GetUserProfileByUserIdAsync(string userId);
     }
 }
