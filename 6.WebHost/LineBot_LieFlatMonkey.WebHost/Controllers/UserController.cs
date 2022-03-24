@@ -23,5 +23,13 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
 
             return Success(res);
         }
+
+        [HttpGet("[action]/{groupId}")]
+        public async Task<IActionResult> GetGroupInfoByGroupId(string groupId)
+        {
+            var res = await this.userService.GetGroupInfoByGroupId(groupId);
+
+            return Success(res);
+        }
     }
 }

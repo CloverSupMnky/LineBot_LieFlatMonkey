@@ -182,7 +182,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         }
 
         /// <summary>
-        /// 取得塔羅牌一般運勢占卜 QuockReply 訊息
+        /// 取得塔羅牌直覺運勢占卜 QuockReply 訊息
         /// </summary>
         /// <returns></returns>
         private List<ResultMessage> GetTarotCardNormalQuickReply() 
@@ -199,7 +199,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         }
 
         /// <summary>
-        /// 取得塔羅牌一般運勢占卜 QuockReply 訊息內容模板
+        /// 取得塔羅牌直覺運勢占卜 QuockReply 訊息內容模板
         /// </summary>
         /// <returns></returns>
         private List<QuickReplyItem> GetTarotCardQuickReplyItems()
@@ -357,7 +357,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             var obj = JsonConvert.DeserializeObject<object>(jsonString);
 
-            return new FlexResultMessage() { Contents = obj, AltText = "雞湯來啦~" };
+            return new FlexResultMessage() { Contents = obj, AltText = "英文佳句" };
         }
 
         /// <summary>

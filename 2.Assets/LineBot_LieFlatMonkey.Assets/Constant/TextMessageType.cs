@@ -13,9 +13,9 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
     {
         public const string TarotCardDaily = "每日運勢";
 
-        public const string TarotCardNormal = "一般運勢";
+        public const string TarotCardNormal = "直覺運勢";
 
-        public const string EnglishStence = "雞湯一碗";
+        public const string EnglishStence = "英文佳句";
 
         public const string MusicRecommand = "音樂推薦";
 

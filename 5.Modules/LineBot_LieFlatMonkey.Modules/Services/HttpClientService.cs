@@ -348,10 +348,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         {
             var endpoint = $"{LineBotMessageEndpoint.GetUserProfile}/{userId}";
 
-            var responseStr = await this.SendGetAsync(endpoint);
-
             try 
             {
+                var responseStr = await this.SendGetAsync(endpoint);
+
                 return JsonConvert.DeserializeObject<UserProfile>(responseStr);
             }
             catch 
@@ -380,6 +380,27 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 var resp = await httpClient.SendAsync(httpReqMsg);
 
                 return await resp.Content.ReadAsStringAsync();
+            }
+        }
+
+        /// <summary>
+        /// 依群組 Id 取得群組資訊
+        /// </summary>
+        /// <param name="groupId">群組 Id</param>
+        /// <returns></returns>
+        public async Task<GroupInfo> GetGroupInfoByGroupIdAsync(string groupId)
+        {
+            var endpoint = LineBotMessageEndpoint.GetGroupInfo.Replace("{#GroupId}", groupId);
+
+            try
+            {
+                var responseStr = await this.SendGetAsync(endpoint);
+
+                return JsonConvert.DeserializeObject<GroupInfo>(responseStr);
+            }
+            catch
+            {
+                return new GroupInfo();
             }
         }
     }

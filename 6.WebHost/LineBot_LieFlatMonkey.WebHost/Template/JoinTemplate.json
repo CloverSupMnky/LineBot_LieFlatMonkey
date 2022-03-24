@@ -7,7 +7,7 @@
     "contents": [
       {
         "type": "text",
-        "text": "Hi！{#UserName}",
+        "text": "Hi ~ {#UserName}",
         "weight": "bold"
       },
       {

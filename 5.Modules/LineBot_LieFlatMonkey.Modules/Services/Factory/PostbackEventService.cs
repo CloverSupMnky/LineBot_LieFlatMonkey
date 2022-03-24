@@ -115,7 +115,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         }
 
         /// <summary>
-        /// 取得塔羅牌一般運勢占卜結果訊息
+        /// 取得塔羅牌直覺運勢占卜結果訊息
         /// </summary>
         /// <returns></returns>
         private async Task<List<ResultMessage>> GetTarotCardMessages()

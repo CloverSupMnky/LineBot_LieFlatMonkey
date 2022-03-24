@@ -16,5 +16,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         public const string Reply = @"https://api.line.me/v2/bot/message/reply";
 
         public const string GetUserProfile = @"https://api.line.me/v2/bot/profile";
+
+        public const string GetGroupInfo = @"GET https://api.line.me/v2/bot/group/{#GroupId}/summary";
     }
 }

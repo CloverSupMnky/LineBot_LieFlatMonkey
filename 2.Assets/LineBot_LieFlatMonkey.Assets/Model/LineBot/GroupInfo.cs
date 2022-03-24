@@ -1,5 +1,4 @@
-﻿using LineBot_LieFlatMonkey.Assets.Constant;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace LineBot_LieFlatMonkey.Assets.Model.LineBot
 {
-    public class Source
+    public class GroupInfo
     {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("userId")]
-        public string UserId { get; set; }
-
         [JsonProperty("groupId")]
         public string GroupId { get; set; }
+
+        [JsonProperty("groupName")]
+        public string GroupName { get; set; }
+
+        [JsonProperty("pictureUrl")]
+        public string PictureUrl { get; set; }
     }
 }

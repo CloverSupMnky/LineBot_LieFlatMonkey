@@ -18,6 +18,16 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         }
 
         /// <summary>
+        /// 依群組 Id 取得群組資訊
+        /// </summary>
+        /// <param name="groupId">群組 Id</param>
+        /// <returns></returns>
+        public async Task<GroupInfo> GetGroupInfoByGroupId(string groupId)
+        {
+            return await this.httpClientService.GetGroupInfoByGroupIdAsync(groupId);
+        }
+
+        /// <summary>
         /// 依使用者 Id 取得使用者資訊
         /// </summary>
         /// <param name="userId">使用者 Id</param>

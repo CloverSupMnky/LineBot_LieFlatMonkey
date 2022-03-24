@@ -59,5 +59,12 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="userId">使用者 Id</param>
         /// <returns></returns>
         Task<UserProfile> GetUserProfileByUserIdAsync(string userId);
+
+        /// <summary>
+        /// 依群組 Id 取得群組資訊
+        /// </summary>
+        /// <param name="groupId">群組 Id</param>
+        /// <returns></returns>
+        Task<GroupInfo> GetGroupInfoByGroupIdAsync(string groupId);
     }
 }

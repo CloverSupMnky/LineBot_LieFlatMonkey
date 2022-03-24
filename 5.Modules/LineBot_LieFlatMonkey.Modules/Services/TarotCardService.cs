@@ -55,7 +55,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 case FortuneTellingType.Daily:
                     res = this.FortuneTellingDaily();
                     break;
-                // 一般運勢占卜
+                // 直覺運勢占卜
                 case FortuneTellingType.Normal:
                     res = this.FortuneTellingNormal();
                     break;
@@ -65,7 +65,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         }
 
         /// <summary>
-        /// 一般運勢占卜
+        /// 直覺運勢占卜
         /// </summary>
         /// <returns>FortuneTellingResp 塔羅牌占卜結果</returns>
         private FortuneTellingResp FortuneTellingNormal()
