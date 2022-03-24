@@ -81,7 +81,6 @@ namespace LineBot_LieFlatMonkey.WebHost
             #region 工廠類別註冊
 
             services.AddScoped<MessageEventService>();
-            services.AddScoped<FollowEventService>();
             services.AddScoped<JoinEventService>();
             services.AddScoped<PostbackEventService>();
             services.AddScoped<Func<string, IEventFactoryService>>(serviceProvider => type =>
@@ -90,8 +89,6 @@ namespace LineBot_LieFlatMonkey.WebHost
                 {
                     case EventType.Message:
                         return serviceProvider.GetService<MessageEventService>();
-                    case EventType.Follow:
-                        return serviceProvider.GetService<FollowEventService>();
                     case EventType.Join:
                         return serviceProvider.GetService<JoinEventService>();
                     case EventType.Postback:

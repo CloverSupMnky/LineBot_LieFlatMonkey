@@ -46,6 +46,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 {
                     var eventService = this.eventFactory.GetEventService(e.Type);
 
+                    if (eventService == null) continue;
+
                     eventService.Invoke(e);
                 }
             }

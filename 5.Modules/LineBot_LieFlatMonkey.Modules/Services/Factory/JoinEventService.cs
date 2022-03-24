@@ -63,12 +63,12 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             var groupName = string.Empty;
 
-            if (groupInfo != null)
+            if (groupInfo != null && !string.IsNullOrEmpty(groupInfo.GroupName))
             {
-                groupName = groupInfo.GroupName;
+                groupName = $"{groupInfo.GroupName} 的大家好呀!!";
             }
 
-            return $"{groupName} 的大家好呀!!";
+            return groupName;
         }
 
         /// <summary>
@@ -80,12 +80,12 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             var userProfile = await this.userService.GetUserProfileByUserId(userId);
 
             var userName = string.Empty;
-            if (userProfile != null) 
+            if (userProfile != null && !string.IsNullOrEmpty(userProfile.DisplayName)) 
             {
-                userName = userProfile.DisplayName;
+                userName = $"{userProfile.DisplayName} 您好呀!!";
             }
 
-            return $"{userName} 您好呀!!";
+            return userName;
         }
 
         /// <summary>
