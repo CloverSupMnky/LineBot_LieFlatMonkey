@@ -35,6 +35,7 @@ namespace LineBot_LieFlatMonkey.Modules.Factory
             {
                 case EventType.Message:
                     return this.messageEventService;
+                case EventType.Follow:
                 case EventType.Join: 
                     return this.joinEventService;
                 case EventType.Postback:

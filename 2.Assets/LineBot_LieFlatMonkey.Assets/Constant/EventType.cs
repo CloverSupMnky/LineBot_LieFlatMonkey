@@ -22,6 +22,12 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         public const string Join = "join";
 
         /// <summary>
+        /// Event object for when your LINE Official Account is added as a friend (or unblocked). 
+        /// You can reply to follow events.
+        /// </summary>
+        public const string Follow = "follow";
+
+        /// <summary>
         /// Event object for when a user performs a postback action which initiates a postback. 
         /// You can reply to postback events.
         /// </summary>
