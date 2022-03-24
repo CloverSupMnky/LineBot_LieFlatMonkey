@@ -35,5 +35,15 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         /// 台語
         /// </summary>
         public const string Taiwanese = "台語";
+
+        /// <summary>
+        /// 粵語
+        /// </summary>
+        public const string Cantonese = "粵語";
+
+        /// <summary>
+        /// 即時
+        /// </summary>
+        public const string RealTime = "即時";
     }
 }

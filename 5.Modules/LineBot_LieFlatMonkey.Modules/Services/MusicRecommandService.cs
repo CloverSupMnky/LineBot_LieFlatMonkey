@@ -32,6 +32,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// 308-日語
         /// 314-韓語
         /// 304-台語
+        /// 320-粵語
+        /// 999-即時
         /// </summary>
         private readonly Dictionary<string, string> musicCateStrTypeDic;
 
@@ -50,7 +52,9 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                 {MusicCateType.Western,MusicCateStrType.Western},
                 {MusicCateType.Japan,MusicCateStrType.Japan},
                 {MusicCateType.Korea,MusicCateStrType.Korea},
-                {MusicCateType.Taiwanese,MusicCateStrType.Taiwanese}
+                {MusicCateType.Taiwanese,MusicCateStrType.Taiwanese},
+                {MusicCateType.RealTime,MusicCateStrType.RealTime},
+                {MusicCateType.Cantonese,MusicCateStrType.Cantonese}
             };
         }
 

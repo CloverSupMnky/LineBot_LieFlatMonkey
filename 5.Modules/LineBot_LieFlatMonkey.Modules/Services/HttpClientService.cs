@@ -133,6 +133,11 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
                     string url = $"https://kma.kkbox.com/charts/api/v1/daily?category={musicCate}&date={now}&lang=tc&limit=10&terr=tw&type=song";
 
+                    if(musicCate == MusicCateType.RealTime) 
+                    {
+                        url = $"https://kma.kkbox.com/charts/api/v1/hourly?lang=tc&limit=20&terr=tw&type=song";
+                    }
+
                     var responseResult = await httpClient.GetStringAsync(url);
 
                     if (!string.IsNullOrEmpty(responseResult)) 
