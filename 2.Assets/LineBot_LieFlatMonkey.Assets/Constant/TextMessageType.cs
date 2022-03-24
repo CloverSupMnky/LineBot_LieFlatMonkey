@@ -13,12 +13,12 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
     {
         public const string TarotCardDaily = "每日運勢";
 
-        public const string TarotCardNormal = "直覺運勢";
+        public const string TarotCardNormal = "直覺占卜";
 
         public const string EnglishStence = "英文佳句";
 
         public const string MusicRecommand = "音樂推薦";
 
-        public const string ArticleRecommand = "熱門文章推薦";
+        public const string ArticleRecommand = "熱門文章";
     }
 }

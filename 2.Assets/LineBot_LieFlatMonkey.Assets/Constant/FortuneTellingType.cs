@@ -17,7 +17,7 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         public const string Daily = "Daily";
 
         /// <summary>
-        /// 直覺運勢占卜
+        /// 直覺占卜占卜
         /// </summary>
         public const string Normal = "Normal";
     }

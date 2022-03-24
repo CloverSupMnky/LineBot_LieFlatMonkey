@@ -35,7 +35,7 @@
               },
               {
                 "type": "text",
-                "text": "2. 直覺運勢占卜 (輸入-直覺運勢)",
+                "text": "2. 直覺運勢占卜 (輸入-直覺占卜)",
                 "size": "md",
                 "color": "#56AF70",
                 "weight": "bold"
@@ -65,7 +65,7 @@
               },
               {
                 "type": "text",
-                "text": "6. PTT 熱門文章推薦 (輸入-熱門文章推薦)",
+                "text": "6. PTT 熱門文章推薦 (輸入-熱門文章)",
                 "size": "md",
                 "color": "#56AF70",
                 "weight": "bold",
