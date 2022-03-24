@@ -1,4 +1,5 @@
-﻿using LineBot_LieFlatMonkey.Entities.Models;
+﻿using LineBot_LieFlatMonkey.Assets.Model.LineBot;
+using LineBot_LieFlatMonkey.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,5 +46,12 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="text">回傳訊息</param>
         /// <returns></returns>
         Task PushErrorMessage(string text);
+
+        /// <summary>
+        /// 取得回傳模板
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        List<ResultMessage> GetResultMessage(string text);
     }
 }

@@ -102,7 +102,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        private List<ResultMessage> GetResultMessage(string text) 
+        public List<ResultMessage> GetResultMessage(string text) 
         {
             return new List<ResultMessage>()
             {

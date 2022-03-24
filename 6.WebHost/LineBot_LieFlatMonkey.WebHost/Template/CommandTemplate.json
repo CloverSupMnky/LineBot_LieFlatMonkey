@@ -1,0 +1,85 @@
+{
+  "type": "bubble",
+  "size": "giga",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "weight": "bold",
+        "margin": "md",
+        "contents": [],
+        "text": "選單指令列",
+        "wrap": true
+      },
+      {
+        "type": "separator",
+        "margin": "sm"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "1. 每日運勢占卜 (輸入-每日運勢)",
+                "size": "md",
+                "weight": "bold",
+                "color": "#56AF70"
+              },
+              {
+                "type": "text",
+                "text": "2. 直覺運勢占卜 (輸入-直覺運勢)",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "3. 熱門音樂推薦 (輸入-音樂推薦)",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "4. 英文佳句(名人,電影) (輸入-英文佳句)",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold",
+                "wrap": true
+              },
+              {
+                "type": "text",
+                "text": "5. 附近地圖探索(1公里內) (分享地址資訊)",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold",
+                "wrap": true
+              },
+              {
+                "type": "text",
+                "text": "6. PTT 熱門文章推薦 (輸入-熱門文章推薦)",
+                "size": "md",
+                "color": "#56AF70",
+                "weight": "bold",
+                "wrap": true
+              }
+            ]
+          }
+        ],
+        "margin": "sm"
+      },
+      {
+        "type": "separator",
+        "margin": "sm"
+      }
+    ]
+  }
+}

@@ -79,7 +79,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 case QuickReplyType.MusicRecommand:
                     return await this.GetMusicRecommandMessages(query);
                 default:
-                    return null;
+                    return this.commonService.GetResultMessage(SystemMessageType.NoData);
             }
         }
 
@@ -97,7 +97,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             string jsonString =
                 await this.commonService.GetMessageTemplateByName("MusicRecommandTemplate.json");
 
-            if (string.IsNullOrEmpty(jsonString)) return null;
+            if (string.IsNullOrEmpty(jsonString)) 
+                return this.commonService.GetResultMessage(SystemMessageType.NoData);
 
             jsonString = jsonString.Replace("{#ImageUrl}", musicRecommand.ImageUrl);
             jsonString = jsonString.Replace("{#Artist}", musicRecommand.Artist);
@@ -109,8 +110,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             return new List<ResultMessage>()
             {
-                new FlexResultMessage(){ Contents = obj ,AltText = "音樂推薦"},
-                new StickerResultMessage(){ StickerId = "11087930", PackageId = "6362"}
+                new FlexResultMessage(){ Contents = obj ,AltText = "音樂推薦"}
             };
         }
 
@@ -126,7 +126,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             string jsonString =
                 await this.commonService.GetMessageTemplateByName("TarotCardTemplate.json");
 
-            if (string.IsNullOrEmpty(jsonString)) return null;
+            if (string.IsNullOrEmpty(jsonString)) 
+                return this.commonService.GetResultMessage(SystemMessageType.NoData);
 
             jsonString = jsonString.Replace("{#ImageUrl}", tarotCard.ImageUrl);
             jsonString = jsonString.Replace("{#Name}", tarotCard.Name);
@@ -140,8 +141,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             return new List<ResultMessage>()
             {
-                new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"},
-                new StickerResultMessage(){ StickerId = "16581294", PackageId = "8525"}
+                new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"}
             };
         }
 
@@ -163,7 +163,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
                 if (carouselResultMessage.Contents.Count == 0)
                 {
-                    return null;
+                    return this.commonService.GetResultMessage(SystemMessageType.NoData);
                 }
 
                 return new List<ResultMessage>()
@@ -173,7 +173,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             }
             catch 
             {
-                return null;
+                return this.commonService.GetResultMessage(SystemMessageType.NoData);
             }
         }
 
@@ -228,7 +228,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
                 if (carouselResultMessage.Contents.Count == 0)
                 {
-                    return null;
+                    return this.commonService.GetResultMessage(SystemMessageType.NoData);
                 }
 
                 return new List<ResultMessage>()
@@ -238,7 +238,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             }
             catch 
             {
-                return null;
+                return this.commonService.GetResultMessage(SystemMessageType.NoData);
             }
         }
 

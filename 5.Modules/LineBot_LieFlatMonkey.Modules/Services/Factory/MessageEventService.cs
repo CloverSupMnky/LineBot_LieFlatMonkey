@@ -138,6 +138,9 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
                 case TextMessageType.ArticleRecommand:
                     messages = this.GetArticleRecommandQuickReply();
                     break;
+                default:
+                    messages = await this.GetCommandMessage();
+                    break;
             }
 
             if(messages == null) 
@@ -148,6 +151,26 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             }
 
             await this.httpClientService.ReplyMessageAsync(messages,replyToken);
+        }
+
+        /// <summary>
+        /// 取得指令列訊息
+        /// </summary>
+        /// <returns></returns>
+        private async Task<List<ResultMessage>> GetCommandMessage()
+        {
+            string jsonString =
+                await this.commonService.GetMessageTemplateByName("CommandTemplate.json");
+
+            if (string.IsNullOrEmpty(jsonString)) return null;
+
+            var obj = JsonConvert.DeserializeObject<object>(jsonString);
+
+            return new List<ResultMessage>()
+            {
+                new FlexResultMessage(){ Contents = obj ,AltText = "指令列"},
+                new StickerResultMessage(){ StickerId = "11087931", PackageId = "6362"}
+            };
         }
 
         /// <summary>
@@ -176,8 +199,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
 
             return new List<ResultMessage>()
             {
-                new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"},
-                new StickerResultMessage(){ StickerId = "16581294", PackageId = "8525"}
+                new FlexResultMessage(){ Contents = obj ,AltText = "運勢占卜結果"}
             };
         }
 
@@ -246,8 +268,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             return new List<ResultMessage>()
             {
                 flexMessage,
-                audioMessage,
-                new StickerResultMessage(){ StickerId = "51626496", PackageId = "11538"}
+                audioMessage
             };
         }
 
