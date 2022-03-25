@@ -63,38 +63,48 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// </summary>
         /// <param name="musicCateType">曲風</param>
         /// <returns></returns>
-        public async Task<MusicRecommandResp> RecommandByMusicCateType(string musicCateType)
+        public async Task<List<MusicRecommandResp>> RecommandByMusicCateType(string musicCateType)
         {
             List<Song> songList = 
                 await this.httpClientService.GetSongInfoByMusicCateType(musicCateType);
 
             Song song = null;
             SearchResult video = null;
+            var res = new List<MusicRecommandResp>();
+            MusicRecommandResp recommandResp;
+            int randomNo = 0;
             if (songList.Count > 0)
             {
-                song = songList[this.commonService.GetRandomNo(songList.Count) - 1];
-                video = await this.GetYTInfo(song);
+                for(int i = 1; i <= 5; i += 1) 
+                {
+                    recommandResp = new MusicRecommandResp();
+                    randomNo = this.commonService.GetRandomNo(songList.Count) - 1;
+                    song = songList[randomNo];
+                    video = await this.GetYTInfo(song);
+
+                    if (song != null)
+                    {
+                        recommandResp.Artist = song.artist_name;
+                        recommandResp.Song = song.song_name;
+                    }
+
+                    if (video != null &&
+                        video.Id != null &&
+                        video.Snippet != null &&
+                        video.Snippet.Thumbnails != null &&
+                        video.Snippet.Thumbnails.Medium != null)
+                    {
+                        recommandResp.VideoUrl = $"https://www.youtube.com/watch?v={video.Id.VideoId}";
+                        recommandResp.ImageUrl = video.Snippet.Thumbnails.Medium.Url;
+                    }
+
+                    recommandResp.SongType = this.musicCateStrTypeDic[musicCateType];
+
+                    res.Add(recommandResp);
+
+                    songList.RemoveAt(randomNo);
+                }
             }
-
-            var res = new MusicRecommandResp();
-
-            if (song != null) 
-            {
-                res.Artist = song.artist_name;
-                res.Song = song.song_name;
-            }
-
-            if (video != null && 
-                video.Id != null && 
-                video.Snippet != null && 
-                video.Snippet.Thumbnails != null &&
-                video.Snippet.Thumbnails.Medium != null)
-            {
-                res.VideoUrl = $"https://www.youtube.com/watch?v={video.Id.VideoId}";
-                res.ImageUrl = video.Snippet.Thumbnails.Medium.Url;
-            }
-
-            res.SongType = this.musicCateStrTypeDic[musicCateType];
 
             return res;
         }

@@ -92,7 +92,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         {
             var musicCateType = query[QueryStringPropertyType.Word];
 
-            var musicRecommand = await this.musicRecommandService.RecommandByMusicCateType(musicCateType);
+            var musicRecommands = await this.musicRecommandService.RecommandByMusicCateType(musicCateType);
 
             string jsonString =
                 await this.commonService.GetMessageTemplateByName("MusicRecommandTemplate.json");
@@ -100,18 +100,36 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             if (string.IsNullOrEmpty(jsonString)) 
                 return this.commonService.GetResultMessage(SystemMessageType.NoData);
 
-            jsonString = jsonString.Replace("{#ImageUrl}", musicRecommand.ImageUrl);
-            jsonString = jsonString.Replace("{#Artist}", musicRecommand.Artist);
-            jsonString = jsonString.Replace("{#SongType}", musicRecommand.SongType);
-            jsonString = jsonString.Replace("{#Song}", musicRecommand.Song);
-            jsonString = jsonString.Replace("{#VideoUrl}", musicRecommand.VideoUrl);
+            string tempString = string.Empty;
+            List<object> objs = new List<object>();
+            object obj;
+            foreach (var musicRecommand in musicRecommands) 
+            {
+                tempString = jsonString;
 
-            var obj = JsonConvert.DeserializeObject<object>(jsonString);
+                tempString = tempString.Replace("{#ImageUrl}", musicRecommand.ImageUrl);
+                tempString = tempString.Replace("{#Artist}", musicRecommand.Artist);
+                tempString = tempString.Replace("{#SongType}", musicRecommand.SongType);
+                tempString = tempString.Replace("{#Song}", musicRecommand.Song);
+                tempString = tempString.Replace("{#VideoUrl}", musicRecommand.VideoUrl);
+
+                obj = JsonConvert.DeserializeObject<object>(tempString);
+
+                objs.Add(obj);
+            }
+
+            if (objs.Count == 0)
+            {
+                return this.commonService.GetResultMessage(SystemMessageType.NoData);
+            }
+
+            var carouselResultMessage = new CarouselResultMessage();
+            carouselResultMessage.Contents = objs;
 
             return new List<ResultMessage>()
-            {
-                new FlexResultMessage(){ Contents = obj ,AltText = "音樂推薦"}
-            };
+                {
+                    new FlexResultMessage(){ Contents = carouselResultMessage ,AltText = "音樂推薦"}
+                };
         }
 
         /// <summary>

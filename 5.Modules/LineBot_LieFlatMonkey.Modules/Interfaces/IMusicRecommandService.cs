@@ -17,6 +17,6 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// </summary>
         /// <param name="musicCateType">曲風</param>
         /// <returns></returns>
-        Task<MusicRecommandResp> RecommandByMusicCateType(string musicCateType);
+        Task<List<MusicRecommandResp>> RecommandByMusicCateType(string musicCateType);
     }
 }
