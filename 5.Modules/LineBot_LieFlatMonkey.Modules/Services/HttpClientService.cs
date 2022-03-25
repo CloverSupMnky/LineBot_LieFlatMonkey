@@ -131,7 +131,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
                     httpClient.DefaultRequestHeaders
                         .Add("Referer", $"https://kma.kkbox.com/charts/daily/song?cate={musicCate}&lang=tc&terr=tw");
 
-                    string url = $"https://kma.kkbox.com/charts/api/v1/daily?category={musicCate}&date={now}&lang=tc&limit=10&terr=tw&type=song";
+                    string url = $"https://kma.kkbox.com/charts/api/v1/daily?category={musicCate}&date={now}&lang=tc&limit=20&terr=tw&type=song";
 
                     if(musicCate == MusicCateType.RealTime) 
                     {
