@@ -24,16 +24,16 @@ namespace LineBot_LieFlatMonkey.Assets.Constant
         /// <summary>
         /// 轉檔結果暫存檔名
         /// </summary>
-        public const string TempAAC = "temp.aac";
+        public const string TempM4A = "temp.m4a";
 
         /// <summary>
-        /// 正常取得音頻檔檔名 AAC 檔案
+        /// 正常取得音頻檔檔名 M4A 檔案
         /// </summary>
-        public const string NormalAAC = "englishsentence.aac";
+        public const string NormalM4A = "englishsentence.m4a";
 
         /// <summary>
-        /// 無法取得使用者對應音頻檔檔名 AAC 檔案
+        /// 無法取得使用者對應音頻檔檔名 M4A 檔案
         /// </summary>
-        public const string NotFoundAAC = "filenotfound.aac";
+        public const string NotFoundM4A = "filenotfound.m4a";
     }
 }

@@ -116,7 +116,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             var tempFilePath = Path.Combine(
                         Environment.CurrentDirectory,
                         DirName.Media,
-                        EnglishSenteceFileNameType.TempAAC
+                        EnglishSenteceFileNameType.TempM4A
                         );
 
             using (var engine = new Engine(ffmpegFilePath))
