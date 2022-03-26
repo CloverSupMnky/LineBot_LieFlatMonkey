@@ -1,4 +1,5 @@
-﻿using LineBot_LieFlatMonkey.Assets.Model.Req;
+﻿using LineBot_LieFlatMonkey.Assets.Constant;
+using LineBot_LieFlatMonkey.Assets.Model.Req;
 using LineBot_LieFlatMonkey.Modules.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +20,10 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
             this.tarotCardService = tarotCardService;
         }
 
-        [HttpPost("[action]")]
-        public IActionResult FortuneTellingByType(FortuneTellingReq req) 
+        [HttpGet("[action]")]
+        public IActionResult FortuneTellingByType() 
         {
-            var res = this.tarotCardService.FortuneTellingByType(req.Type);
+            var res = this.tarotCardService.FortuneTellingByType(FortuneTellingType.Daily);
 
             return Success(res);
         }
