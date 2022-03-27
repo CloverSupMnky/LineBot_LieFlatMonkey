@@ -39,20 +39,27 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// <returns></returns>
         public async Task<string> GetIntent(string text)
         {
-            LuisResult luisResult = await this.prediction.ResolveAsync(
-                appId: this.luisSetting.Value.AppID,
-                query: text,
-                timezoneOffset: null,
-                verbose: true,
-                staging: false,
-                spellCheck: false,
-                bingSpellCheckSubscriptionKey: null,
-                log: false,
-                cancellationToken: CancellationToken.None);
+            try 
+            {
+                LuisResult luisResult = await this.prediction.ResolveAsync(
+                    appId: this.luisSetting.Value.AppID,
+                    query: text,
+                    timezoneOffset: null,
+                    verbose: true,
+                    staging: false,
+                    spellCheck: false,
+                    bingSpellCheckSubscriptionKey: null,
+                    log: false,
+                    cancellationToken: CancellationToken.None);
 
-            if (luisResult == null || luisResult.TopScoringIntent == null) return text;
+                if (luisResult == null || luisResult.TopScoringIntent == null) return text;
 
-            return luisResult.TopScoringIntent.Intent;
+                return luisResult.TopScoringIntent.Intent;
+            }
+            catch 
+            {
+                return text;
+            }
         }
     }
 }
