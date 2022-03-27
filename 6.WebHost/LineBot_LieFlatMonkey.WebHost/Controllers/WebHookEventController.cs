@@ -3,6 +3,7 @@ using LineBot_LieFlatMonkey.Modules.Interfaces;
 using LineBot_LieFlatMonkey.WebHost.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace LineBot_LieFlatMonkey.WebHost.Controllers
 {
@@ -19,9 +20,9 @@ namespace LineBot_LieFlatMonkey.WebHost.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(VerifySignatureFilter))]
-        public IActionResult Post(WebHookEvent webHookEvent) 
+        public async Task<IActionResult> Post(WebHookEvent webHookEvent) 
         {
-            this.webHookEventService.EventHandler(webHookEvent);
+            await this.webHookEventService.EventHandler(webHookEvent);
 
             return Ok();
         }

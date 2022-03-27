@@ -28,14 +28,12 @@ namespace LineBot_LieFlatMonkey.Modules.Services
         /// 處理 Line Bot 訊息
         /// </summary>
         /// <param name="webHookEvent">Line Bot 訊息物件</param>
-        public void EventHandler(WebHookEvent webHookEvent)
+        public async Task EventHandler(WebHookEvent webHookEvent)
         {
             if(webHookEvent == null || webHookEvent.Events == null) 
             {
-                this.commonService
-                    .PushErrorMessage($"{SystemMessageType.SysError}-無 WebHookEvent 資料")
-                    .GetAwaiter()
-                    .GetResult();
+                await this.commonService.PushErrorMessage(
+                    $"{SystemMessageType.SysError}-無 WebHookEvent 資料");
 
                 return;
             }
@@ -48,15 +46,13 @@ namespace LineBot_LieFlatMonkey.Modules.Services
 
                     if (eventService == null) continue;
 
-                    eventService.Invoke(e);
+                    await eventService.Invoke(e);
                 }
             }
             catch(Exception ex) 
             {
-                this.commonService
-                    .PushErrorMessage($"{SystemMessageType.SysError}-{ex.Message}")
-                    .GetAwaiter()
-                    .GetResult();
+                await this.commonService.PushErrorMessage(
+                    $"{SystemMessageType.SysError}-{ex.Message}");
 
                 return;
             }
