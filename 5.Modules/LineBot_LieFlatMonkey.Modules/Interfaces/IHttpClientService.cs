@@ -66,5 +66,12 @@ namespace LineBot_LieFlatMonkey.Modules.Interfaces
         /// <param name="groupId">群組 Id</param>
         /// <returns></returns>
         Task<GroupInfo> GetGroupInfoByGroupIdAsync(string groupId);
+
+        /// <summary>
+        /// 取得意圖判斷結果
+        /// </summary>
+        /// <param name="text">需要意圖判斷的文字</param>
+        /// <returns></returns>
+        Task<string> GetIntentAsync(string text);
     }
 }

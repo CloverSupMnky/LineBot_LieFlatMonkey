@@ -25,13 +25,16 @@ namespace LineBot_LieFlatMonkey.Modules.Services
     {
         private readonly IOptions<LineBotSetting> lineBotSetting;
         private readonly IOptions<GoogleDriverSetting> googleDriverSetting;
+        private readonly IOptions<LUISSetting> luisSetting;
 
         public HttpClientService(
             IOptions<LineBotSetting> lineBotSetting,
-            IOptions<GoogleDriverSetting> googleDriverSetting)
+            IOptions<GoogleDriverSetting> googleDriverSetting,
+            IOptions<LUISSetting> luisSetting)
         {
             this.lineBotSetting = lineBotSetting;
             this.googleDriverSetting = googleDriverSetting;
+            this.luisSetting = luisSetting;
         }
 
         /// <summary>
@@ -418,6 +421,27 @@ namespace LineBot_LieFlatMonkey.Modules.Services
             catch
             {
                 return new GroupInfo();
+            }
+        }
+
+        /// <summary>
+        /// 取得意圖判斷結果
+        /// </summary>
+        /// <param name="text">需要意圖判斷的文字</param>
+        /// <returns></returns>
+        public async Task<string> GetIntentAsync(string text)
+        {
+            var endpoint = $"{this.luisSetting.Value.EndpointURL}/luis/prediction/v3.0/apps/{this.luisSetting.Value.AppID}/slots/production/predict?verbose=true&show-all-intents=true&log=true&subscription-key={this.luisSetting.Value.PrimaryKey}&query={text}";
+
+            try
+            {
+                var responseStr = await this.SendGetAsync(endpoint);
+
+                return JsonConvert.DeserializeObject<LuisResult>(responseStr).prediction.topIntent;
+            }
+            catch
+            {
+                return text;
             }
         }
     }
