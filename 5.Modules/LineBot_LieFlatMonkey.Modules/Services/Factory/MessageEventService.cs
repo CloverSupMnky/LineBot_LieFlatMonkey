@@ -27,6 +27,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         private readonly ISpeechService speechService;
         private readonly IOptions<ApiDomainSetting> apiDomainSetting;
         private readonly ICommonService commonService;
+        private readonly ILUISService luisService;
 
         public MessageEventService(
             IHttpClientService httpClientService,
@@ -34,7 +35,8 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             IEnglishSentenceService englishSentenceService,
             ISpeechService speechService,
             IOptions<ApiDomainSetting> apiDomainSetting,
-            ICommonService commonService)
+            ICommonService commonService,
+            ILUISService luisService)
         {
             this.httpClientService = httpClientService;
             this.tarotCardService = tarotCardService;
@@ -42,6 +44,7 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
             this.speechService = speechService;
             this.apiDomainSetting = apiDomainSetting;
             this.commonService = commonService;
+            this.luisService = luisService;
         }
 
         /// <summary>
@@ -120,7 +123,10 @@ namespace LineBot_LieFlatMonkey.Modules.Services.Factory
         {
             List<ResultMessage> messages = null;
 
-            switch (message.Text)
+            // 意圖判斷
+            var intent = await this.luisService.GetIntent(message.Text);
+
+            switch (intent)
             {
                 case TextMessageType.TarotCardDaily:
                     messages = await this.TarotCardMessage();

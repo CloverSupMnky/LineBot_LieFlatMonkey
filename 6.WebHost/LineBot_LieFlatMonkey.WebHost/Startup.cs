@@ -62,6 +62,7 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.Configure<SpeechSetting>(Configuration.GetSection("SpeechSetting"));
             services.Configure<ApiDomainSetting>(Configuration.GetSection("ApiDomainSetting"));
             services.Configure<GoogleDriverSetting>(Configuration.GetSection("GoogleDriverSetting"));
+            services.Configure<LUISSetting>(Configuration.GetSection("LUISSetting"));
 
             // 註冊自訂義 Filter
             // 若 Controller 那使用 TypeFilter(可以帶參數) 就不需註冊
@@ -77,6 +78,7 @@ namespace LineBot_LieFlatMonkey.WebHost
             services.AddScoped<ISpeechService, SpeechService>();
             services.AddScoped<IWebHookEventService, WebHookEventService>();
             services.AddScoped<IHttpClientService, HttpClientService>();
+            services.AddScoped<ILUISService, LUISService>();
 
             #region 工廠類別註冊
 

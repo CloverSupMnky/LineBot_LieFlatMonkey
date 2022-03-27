@@ -22,7 +22,7 @@
         "weight": "bold",
         "margin": "md",
         "contents": [],
-        "text": "功能有下列幾個，可直接點選選單操作或輸入文字",
+        "text": "功能有下列幾個，可直接點選選單操作或輸入(完整或部分)指令文字",
         "wrap": true
       },
       {
@@ -40,28 +40,31 @@
             "contents": [
               {
                 "type": "text",
-                "text": "1. 每日運勢占卜 (輸入-每日運勢)",
+                "text": "1. 每日運勢占卜 (完整指令-每日運勢)",
                 "size": "md",
                 "weight": "bold",
-                "color": "#56AF70"
+                "color": "#56AF70",
+                "wrap": true
               },
               {
                 "type": "text",
-                "text": "2. 直覺運勢占卜 (輸入-直覺占卜)",
+                "text": "2. 直覺運勢占卜 (完整指令-直覺占卜)",
                 "size": "md",
                 "color": "#56AF70",
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
-                "text": "3. 熱門音樂推薦 (輸入-音樂推薦)",
+                "text": "3. 熱門音樂推薦 (完整指令-音樂推薦)",
                 "size": "md",
                 "color": "#56AF70",
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
-                "text": "4. 英文佳句(名人,電影) (輸入-英文佳句)",
+                "text": "4. 英文佳句(名人,電影) (完整指令-英文佳句)",
                 "size": "md",
                 "color": "#56AF70",
                 "weight": "bold",
@@ -77,7 +80,7 @@
               },
               {
                 "type": "text",
-                "text": "6. PTT 熱門文章推薦 (輸入-熱門文章)",
+                "text": "6. PTT 熱門文章推薦 (完整指令-熱門文章)",
                 "size": "md",
                 "color": "#56AF70",
                 "weight": "bold",
